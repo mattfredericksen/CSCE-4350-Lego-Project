@@ -1,0 +1,5 @@
+# click==7.1.2
+console-menu==0.6.0
+mysql-connector-python==8.0.20
+protobuf==3.12.2
+six==1.15.0
