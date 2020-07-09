@@ -5,7 +5,7 @@
 4. Run `lego_cli.py`
 
 Notes: 
-1. This currently uses Python 3.8. Different package versions might be required for previous Python versions.
+1. This currently uses [Python 3.8](https://www.python.org/downloads/). Different package versions might be required for previous Python versions.
 2. MySQL installation is not required yet.
 
 ### MySQL
