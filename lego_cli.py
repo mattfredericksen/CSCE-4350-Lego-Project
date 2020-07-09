@@ -47,8 +47,18 @@ main_menu = ConsoleMenu('Welcome to The Lego Store', exit_option_text='Log Out')
 
 browse_item = FunctionItem('Browse Bricks & Sets', input, ['not yet implemented'])
 order_item = FunctionItem('Place an Order', input, ['not yet implemented'])
+
+# \/\/ account menu \/\/
 account_menu = ConsoleMenu('Account Information', exit_option_text='Return to Main Menu')
+account_menu_items = (FunctionItem('Change Username', input, ['not yet implemented']),
+                      FunctionItem('Change Password', input, ['not yet implemented']),
+                      FunctionItem('Change Email', input, ['not yet implemented']),
+                      FunctionItem('Change Store Preference', input, ['not yet implemented']),
+                      FunctionItem('Change Payment Options', input, ['not yet implemented']))
+for item in account_menu_items:
+    account_menu.append_item(item)
 account_item = SubmenuItem('Account Information', account_menu, menu=main_menu)
+
 
 main_menu.append_item(browse_item)
 main_menu.append_item(order_item)
