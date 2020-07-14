@@ -3,6 +3,7 @@ from consolemenu.items import FunctionItem, SubmenuItem, CommandItem
 from getpass import getpass
 
 from .main_menu import main_menu
+from .employee_main_menu import employee_main_menu
 
 
 def login():
@@ -11,7 +12,10 @@ def login():
 
     # TODO: log into SQL server
     # Assuming success:
-    main_menu.show()
+    if input("Are you an employee? (don't lie) [y/n]: ").lower() in ('yes', 'ye', 'y'):
+        employee_main_menu.show()
+    else:
+        main_menu.show()
 
     # TODO: open a different menu based on capabilities of user
     #       (online mode vs store mode)
