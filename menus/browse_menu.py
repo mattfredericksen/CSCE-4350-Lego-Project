@@ -18,7 +18,7 @@ class SelectionMenuFromTuples(SelectionMenu):
                  prologue_text=None, epilogue_text=None, show_exit_option=True, exit_option_text='Exit'):
         super(SelectionMenu, self).__init__(title, subtitle, screen=screen, formatter=formatter,
                                             prologue_text=prologue_text, epilogue_text=epilogue_text,
-                                            show_exit_option=show_exit_option, exit_option_text=exit_option_text)1
+                                            show_exit_option=show_exit_option, exit_option_text=exit_option_text)
         for index, item in tuples:
             self.append_item(SelectionItem(item, index, self))
 
