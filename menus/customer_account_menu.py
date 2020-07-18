@@ -9,6 +9,7 @@ account_menu = ConsoleMenu('Account Information', exit_option_text='Return to Ma
 for item in (NotImplementedItem('Change Username'),
              NotImplementedItem('Change Password'),
              NotImplementedItem('Change Email'),
-             NotImplementedItem('Change Store Preference'),
-             NotImplementedItem('Change Payment Options')):
+             NotImplementedItem('Change Payment Options'),
+             NotImplementedItem('Change Shipping Address'),
+             NotImplementedItem('Change Store Preference')):
     account_menu.append_item(item)

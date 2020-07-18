@@ -11,5 +11,6 @@ main_menu = ConsoleMenu('Welcome to The Lego Store', exit_option_text='Log Out')
 
 for item in (SubmenuItem('Browse Bricks & Sets', browse_menu),
              NotImplementedItem('Place an Order'),
+             NotImplementedItem('Order History'),
              SubmenuItem('Account Information', account_menu)):
     main_menu.append_item(item)
