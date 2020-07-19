@@ -2,6 +2,12 @@ from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem
 from .not_implemented_item import NotImplementedItem
 
+### MENU FUNCTIONS IN HERE ###
+
+
+
+
+###############################
 
 # \/\/\/ CUSTOMER ACCOUNT MENU \/\/\/
 
