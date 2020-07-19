@@ -114,9 +114,16 @@ def browse_sets():
 
 def search():
     query = input('Search Query: ')
-    choices = {key: f'{value["name"]} {value["description"]}' for key, value in sets.items()}
+    choices = {key: f'{key} {value["name"]} {value["description"]}'
+               for key, value in sets.items()}
+    # TODO: guarantee that brick ids and set ids do not overlap
+    choices.update({key: f'{key} {value["description"]}'
+                    for key, value in bricks.items()})
     matches = process.extractBests(query, choices, score_cutoff=50, limit=25)
-    matches = tuple((match[2], sets[match[2]]['name']) for match in matches)
+
+    matches = tuple((i := match[2],
+                     (sets[i]['name'] if i in sets else bricks[i]['description']))
+                    for match in matches)
 
     description = 'Select an item to view more details or ' \
                   'to add it to your cart'
@@ -129,7 +136,10 @@ def search():
         if browser.selected_item.text == 'Return':
             break
         else:
-            set_details(browser.selected_item.index)
+            if (i := browser.selected_item.index) in sets:
+                set_details(i)
+            else:
+                brick_details(i)
 
 
 browse_menu = ConsoleMenu('Browse & Search LEGO Products',
@@ -137,6 +147,5 @@ browse_menu = ConsoleMenu('Browse & Search LEGO Products',
 
 for item in (FunctionItem('Browse Bricks', browse_bricks),
              FunctionItem('Browse Sets', browse_sets),
-             NotImplementedItem('Browse All'),
              FunctionItem('Search All', search)):
     browse_menu.append_item(item)
