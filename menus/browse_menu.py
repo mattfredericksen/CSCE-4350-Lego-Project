@@ -2,6 +2,8 @@ from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem
 from consolemenu.screen import Screen
 
+from fuzzywuzzy import process, utils
+
 from .selection_menu import SelectionMenuFromTuples
 from .not_implemented_item import NotImplementedItem
 from test_data.static import bricks, sets
@@ -66,7 +68,7 @@ def set_details(set_id):
         print(f'Name: {item["name"]}',
               f'Description: {item["description"]}',
               f'Price: ${item["price"]}',
-              f'Bricks in this set: {sum(qty for qty in item["set_items"].values())}',
+              f'Piece count: {sum(qty for qty in item["set_items"].values())}',
               f'Inventory: {item["inventory"]}', sep='\n')
         print('\n')  # two newlines
 
@@ -110,11 +112,31 @@ def browse_sets():
             set_details(browser.selected_item.index)
 
 
+def search():
+    query = input('Search Query: ')
+    choices = {key: f'{value["name"]} {value["description"]}' for key, value in sets.items()}
+    matches = process.extractBests(query, choices, score_cutoff=50, limit=25)
+    matches = tuple((match[2], sets[match[2]]['name']) for match in matches)
+
+    description = 'Select an item to view more details or ' \
+                  'to add it to your cart'
+    browser = SelectionMenuFromTuples(matches, title="Search Results",
+                                      prologue_text=description,
+                                      epilogue_text=description,
+                                      exit_option_text='Return')
+    while True:
+        browser.show()
+        if browser.selected_item.text == 'Return':
+            break
+        else:
+            set_details(browser.selected_item.index)
+
+
 browse_menu = ConsoleMenu('Browse & Search LEGO Products',
                           exit_option_text='Return to Main Menu')
 
 for item in (FunctionItem('Browse Bricks', browse_bricks),
              FunctionItem('Browse Sets', browse_sets),
              NotImplementedItem('Browse All'),
-             NotImplementedItem('Search All')):
+             FunctionItem('Search All', search)):
     browse_menu.append_item(item)
