@@ -3,9 +3,6 @@ from .bricks import generate_bricks
 
 
 def generate_sets():
-    colors = ('red', 'orange', 'yellow', 'green',
-              'blue', 'indigo', 'violet', 'white', 'black')
-
     bricks = generate_bricks()
     brick_ids = list(bricks.keys())
 
