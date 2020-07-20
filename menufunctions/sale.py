@@ -57,19 +57,23 @@ def view(sale_items):
     total_quantity = 0
     total_price = 0.0
     print('SALE IN PROGRESS\n')
-    print('Quantity | Items')
-    print('-------- | ---------------')
+    print('Quantity | Unit Price | Items')
+    print('-------- | ---------- | ---------------')
     for item_id, quantity in sale_items['sets'].items():
-        print(f'{quantity:8} | {(item := sets[item_id])["name"]}')
+        item = sets[item_id]
         total_quantity += quantity
         total_price += item['price'] * quantity
+        price = f'${item["price"]:.2f}'
+        print(f'{quantity:8} | {price:>10} | {item["name"]}')
     for item_id, quantity in sale_items['bricks'].items():
-        print(f'{quantity:8} | {(item := bricks[item_id])["description"]}')
+        item = bricks[item_id]
         total_quantity += quantity
         total_price += item['price'] * quantity
+        price = f'${item["price"]:.2f}'
+        print(f'{quantity:8} | {price:>10} | {item["name"]}')
     print('\nTotals\n------')
-    print(f'Quantity: {total_quantity}')
-    print(f'Price: ${round(total_price, 2):,}')
+    print(f'| Quantity: {total_quantity}')
+    print(f'| Price: ${total_price:,.2f}')
 
     input('\nPress [enter] to return to sale.')
 
