@@ -1,10 +1,10 @@
 from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem
 from consolemenu.screen import Screen
+
 from typing import Literal
 
 from menus.not_implemented_item import NotImplementedItem
-
 from test_data.static import sets, bricks
 
 
@@ -54,7 +54,24 @@ def remove(sale_items):
 
 
 def view(sale_items):
-    pass
+    total_quantity = 0
+    total_price = 0.0
+    print('SALE IN PROGRESS\n')
+    print('Quantity | Items')
+    print('-------- | ---------------')
+    for item_id, quantity in sale_items['sets'].items():
+        print(f'{quantity:8} | {(item := sets[item_id])["name"]}')
+        total_quantity += quantity
+        total_price += item['price'] * quantity
+    for item_id, quantity in sale_items['bricks'].items():
+        print(f'{quantity:8} | {(item := bricks[item_id])["description"]}')
+        total_quantity += quantity
+        total_price += item['price'] * quantity
+    print('\nTotals\n------')
+    print(f'Quantity: {total_quantity}')
+    print(f'Price: ${round(total_price, 2):,}')
+
+    input('\nPress [enter] to return to sale.')
 
 
 def complete(sale_items):
@@ -70,7 +87,7 @@ def sale():
                  FunctionItem('Add brick(s) to sale', add,
                               [sale_items['bricks'], 'Brick']),
                  NotImplementedItem('Remove item from sale'),
-                 NotImplementedItem('View current sale items'),
+                 FunctionItem('View current sale items', view, [sale_items]),
                  NotImplementedItem('Complete sale')):
         menu.append_item(item)
     menu.show()
