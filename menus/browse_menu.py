@@ -53,7 +53,7 @@ def browse_bricks():
                                       exit_option_text='Return')
     while True:
         browser.show()
-        if browser.selected_item.text == 'Return':
+        if browser.selected_item is browser.exit_item:
             break
         else:
             brick_details(browser.selected_item.index)
@@ -106,7 +106,7 @@ def browse_sets():
                                       exit_option_text='Return')
     while True:
         browser.show()
-        if browser.selected_item.text == 'Return':
+        if browser.selected_item is browser.exit_item:
             break
         else:
             set_details(browser.selected_item.index)
