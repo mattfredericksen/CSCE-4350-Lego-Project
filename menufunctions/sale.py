@@ -1,6 +1,7 @@
 from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem
 from consolemenu.screen import Screen
+from menus.selection_menu import SelectionMenuFromTuples
 
 from typing import Literal
 
@@ -50,7 +51,41 @@ def add(sale_items, mode: Literal['Set', 'Brick']):
 
 
 def remove(sale_items):
-    pass
+    sale_sets, sale_bricks = sale_items['sets'], sale_items['bricks']
+    items = [(i, f'(Qty: {q}) {sets[i]["name"]}')
+             for i, q in sale_sets.items()] +  \
+            [(i, f'(Qty: {q}) {bricks[i]["description"]}')
+             for i, q in sale_bricks.items()]
+
+    menu = SelectionMenuFromTuples(items, title="Remove Items from Sale",
+                                   exit_option_text='Return to Sale')
+    while True:
+        menu.show()
+        menu_item = menu.selected_item
+        if menu_item is menu.exit_item:
+            break
+        item_id = menu_item.index
+
+        print('REMOVING ITEM\n')
+        print(menu_item.text, '\n')
+        quantity = input('How many should be removed? [enter nothing to cancel]: ')
+        try:
+            quantity = int(quantity)
+        except ValueError:
+            if quantity == '':
+                continue
+
+        if quantity < 1:
+            continue
+
+        items = sale_sets if item_id in sale_sets else sale_bricks
+        if quantity < items[item_id]:
+            qty_len = len(str(items[item_id]))
+            items[item_id] -= quantity
+            menu_item.text = f'(Qty: {items[item_id]})' + menu_item.text[(7 + qty_len):]
+        else:
+            del items[item_id]
+            menu.remove_item(menu_item)
 
 
 def view(sale_items):
@@ -86,11 +121,12 @@ def sale():
     sale_items = {'sets': {}, 'bricks': {}}
 
     menu = ConsoleMenu('Sale In Progress', exit_option_text='Cancel sale')
-    for item in (FunctionItem('Add set(s) to sale', add,
+    for item in (FunctionItem('Add sets to sale', add,
                               [sale_items['sets'], 'Set']),
-                 FunctionItem('Add brick(s) to sale', add,
+                 FunctionItem('Add bricks to sale', add,
                               [sale_items['bricks'], 'Brick']),
-                 NotImplementedItem('Remove item from sale'),
+                 FunctionItem('Remove items from sale', remove,
+                              [sale_items]),
                  FunctionItem('View current sale items', view, [sale_items]),
                  NotImplementedItem('Complete sale')):
         menu.append_item(item)
