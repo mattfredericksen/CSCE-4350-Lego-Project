@@ -9,14 +9,13 @@ from menus.not_implemented_item import NotImplementedItem
 from test_data.static import sets, bricks
 
 
-def add(sale_items, mode: Literal['Set', 'Brick']):
-    while True:
-        product_id = input(f'{mode} ID [enter nothing to return]: ')
+def add(sale_items: dict, mode: Literal['Set', 'Brick']) -> None:
+    while product_id := input(f'{mode} ID [enter nothing to return]: '):
         try:
             product_id = int(product_id)
         except ValueError:
-            if product_id == '':
-                return
+            Screen.clear()
+            print(f'"{product_id}" is not a valid {mode} ID.\n')
             continue
 
         if product_id not in (sets if mode is 'Set' else bricks):
@@ -48,9 +47,11 @@ def add(sale_items, mode: Literal['Set', 'Brick']):
 
         # add to or create entry depending on if it already exists
         sale_items[product_id] = sale_items.get(product_id, 0) + quantity
+        Screen.clear()
+        print(f'Added {quantity} items to the sale.\n')
 
 
-def remove(sale_items):
+def remove(sale_items: dict) -> None:
     sale_sets, sale_bricks = sale_items['sets'], sale_items['bricks']
     items = [(i, f'(Qty: {q}) {sets[i]["name"]}')
              for i, q in sale_sets.items()] +  \
@@ -61,10 +62,8 @@ def remove(sale_items):
                                    exit_option_text='Return to Sale')
     while True:
         menu.show()
-        menu_item = menu.selected_item
-        if menu_item is menu.exit_item:
+        if (menu_item := menu.selected_item) is menu.exit_item:
             break
-        item_id = menu_item.index
 
         print('REMOVING ITEM\n')
         print(menu_item.text, '\n')
@@ -78,6 +77,7 @@ def remove(sale_items):
         if quantity < 1:
             continue
 
+        item_id = menu_item.index
         items = sale_sets if item_id in sale_sets else sale_bricks
         if quantity < items[item_id]:
             qty_len = len(str(items[item_id]))
@@ -88,10 +88,10 @@ def remove(sale_items):
             menu.remove_item(menu_item)
 
 
-def view(sale_items):
+def print_sale(sale_items: dict, title: str) -> None:
     total_quantity = 0
     total_price = 0.0
-    print('SALE IN PROGRESS\n')
+    print(title, '\n')
     print('Quantity | Unit Price | Items')
     print('-------- | ---------- | ---------------')
     for item_id, quantity in sale_items['sets'].items():
@@ -110,24 +110,50 @@ def view(sale_items):
     print(f'| Quantity: {total_quantity}')
     print(f'| Price: ${total_price:,.2f}')
 
+
+def view(sale_items: dict) -> None:
+    print_sale(sale_items, 'SALE IN PROGRESS')
     input('\nPress [enter] to return to sale.')
 
 
-def complete(sale_items):
+def complete(sale_items: dict) -> bool:
+    # choose payment option
+    # process payment
+    # record sale in database
+    # return to main menu
     pass
+
+
+def confirm_exit(sale_items: dict) -> bool:
+    if not (sale_items['sets'] or sale_items['bricks']):
+        return True
+
+    while True:
+        print_sale(sale_items, 'CONFIRM SALE CANCELLATION')
+        answer = input('\nAre you sure you want to cancel this sale? [y/n]: ')
+        if (answer := answer.lower()) in ('y', 'ye', 'yes'):
+            return True
+        elif answer in ('n', 'no'):
+            return False
+        else:
+            Screen.clear()
 
 
 def sale():
     sale_items = {'sets': {}, 'bricks': {}}
 
-    menu = ConsoleMenu('Sale In Progress', exit_option_text='Cancel sale')
+    menu = ConsoleMenu('Sale In Progress', show_exit_option=False)
     for item in (FunctionItem('Add sets to sale', add,
-                              [sale_items['sets'], 'Set']),
+                              (sale_items['sets'], 'Set')),
                  FunctionItem('Add bricks to sale', add,
-                              [sale_items['bricks'], 'Brick']),
-                 FunctionItem('Remove items from sale', remove,
-                              [sale_items]),
-                 FunctionItem('View current sale items', view, [sale_items]),
-                 NotImplementedItem('Complete sale')):
+                              (sale_items['bricks'], 'Brick')),
+                 FunctionItem('Remove items from sale', remove, (sale_items,)),
+                 FunctionItem('View current sale items', view, (sale_items,)),
+                 FunctionItem('Complete sale', complete, (sale_items,),
+                              should_exit=True),
+                 FunctionItem('Cancel sale', confirm_exit, (sale_items,),
+                              should_exit=True)):
         menu.append_item(item)
-    menu.show()
+
+    while not menu.returned_value:
+        menu.show()
