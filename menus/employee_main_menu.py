@@ -1,9 +1,9 @@
 """This is the menu that employees see upon logging in."""
 
 from consolemenu import ConsoleMenu
-from consolemenu.items import FunctionItem, SubmenuItem
+from consolemenu.items import FunctionItem
 
-from .not_implemented_item import NotImplementedItem
+from menuclasses.not_implemented_item import NotImplementedItem
 from menufunctions.sale import sale
 
 
@@ -15,3 +15,5 @@ for item in (FunctionItem('Start a Sale', sale),
              NotImplementedItem('Order Management'),
              NotImplementedItem('Delivery Management')):
     employee_main_menu.append_item(item)
+
+# if employee is a manager, add more menu options

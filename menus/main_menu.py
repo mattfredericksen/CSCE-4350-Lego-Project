@@ -1,11 +1,11 @@
 """This is the first menu customers see upon logging in."""
 
 from consolemenu import ConsoleMenu
-from consolemenu.items import FunctionItem, SubmenuItem
+from consolemenu.items import SubmenuItem
 
 from .customer_account_menu import account_menu
 from .browse_menu import browse_menu
-from .not_implemented_item import NotImplementedItem
+from menuclasses.not_implemented_item import NotImplementedItem
 
 
 main_menu = ConsoleMenu('Welcome to The Lego Store',

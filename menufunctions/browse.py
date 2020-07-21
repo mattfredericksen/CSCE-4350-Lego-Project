@@ -1,6 +1,6 @@
 """This functions might be gerneralizable for reuse."""
 
-from menus.selection_menu import SelectionMenuFromTuples
+from menuclasses.selection_menu import SelectionMenuFromTuples
 from .details import details
 
 from typing import Literal
