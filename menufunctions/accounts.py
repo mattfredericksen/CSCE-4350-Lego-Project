@@ -6,19 +6,29 @@ from menus.main_menu import main_menu
 from menus.employee_main_menu import employee_main_menu
 
 
-def login():
+def login(store_mode: bool):
     username = input('username: ')
 
     # getpass doesn't show characters as user types
     password = getpass('password: ')
 
+    if store_mode:
+        # use employee table for checking username & password
+        pass
+    else:
+        # use customer table ...
+        pass
+
     # TODO: log into SQL server
     #       store credentials in `context` dict
+
     context = {'username': username,
                'password': password}
 
     # Assuming success:
-    if input("Are you an employee? (don't lie) [y/n]: ").lower() in ('yes', 'ye', 'y'):
+    if store_mode:
+        # temporary:
+        context['store'] = int(input('Store ID: '))
         employee_main_menu(context)
     else:
         main_menu(context)

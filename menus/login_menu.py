@@ -8,6 +8,7 @@ from menufunctions.accounts import login, create_account
 
 login_menu = ConsoleMenu('The Lego Store', 'Please log in to continue')
 
-for item in (FunctionItem('Login', login),
-             FunctionItem('Create Account', create_account)):
+for item in (FunctionItem('Customer Login', login, (False,)),
+             FunctionItem('Create Account', create_account),
+             FunctionItem('Store Mode', login, (True,))):
     login_menu.append_item(item)
