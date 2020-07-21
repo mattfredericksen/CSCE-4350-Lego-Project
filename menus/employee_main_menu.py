@@ -6,6 +6,7 @@ from consolemenu.items import FunctionItem
 from menuclasses.not_implemented_item import NotImplementedItem
 from .sale_menu import sale_menu
 from .store_menu import store_menu
+from .employee_menu import employee_menu
 
 
 def employee_main_menu(context: dict):
@@ -15,7 +16,7 @@ def employee_main_menu(context: dict):
     for item in (FunctionItem('Start a Sale', sale_menu, (context,)),
                  NotImplementedItem('Start a Return'),
                  NotImplementedItem('Inventory Management'),  # order/delivery
-                 NotImplementedItem('Employee Management'),
+                 FunctionItem('Employee Management', employee_menu, (context,)),
                  FunctionItem('Store Management', store_menu, (context,)),
                  NotImplementedItem('Reports')):
 
