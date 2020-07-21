@@ -368,3 +368,24 @@ bricks = {
     9925: {'description': '13x15 indigo', 'inventory': 4, 'price': 4.08},
     9976: {'description': '9x12 red', 'inventory': 2, 'price': 2.52}
 }
+
+stores = {
+    1: {'address': '1348 Paul Wayne Haggerty Road, Avondale, LA 70094',
+        'manager': 1, 'active': True},
+    2: {'address': '3253 Terra Cotta Street, Ideal Corners, MN 56442',
+        'manager': 4, 'active': True},
+    3: {'address': '1684 Turkey Pen Road, New York, NY 10038',
+        'manager': 7, 'active': True},
+}
+
+employees = {
+    1:  {'name': 'Jack M Kerr', 'store': 1},
+    2:  {'name': 'Earl S Huhn', 'store': 1},
+    3:  {'name': 'Kim R Hartman', 'store': 1},
+    4:  {'name': 'Mabel P Brown', 'store': 2},
+    5:  {'name': 'James B Martinez', 'store': 2},
+    6:  {'name': 'Janice F Rutherford', 'store': 2},
+    7:  {'name': 'Phyllis C Hallett', 'store': 3},
+    8:  {'name': 'Caleb D Crosley', 'store': 3},
+    9:  {'name': 'Nick M Gonzalez', 'store': 3}
+}
