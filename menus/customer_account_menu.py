@@ -1,7 +1,9 @@
 """This menu is shown when customers select "Account Information"."""
 
 from consolemenu import ConsoleMenu
+from consolemenu.items import FunctionItem
 from menuclasses.not_implemented_item import NotImplementedItem
+
 
 ### MENU FUNCTIONS IN HERE ###
 
@@ -9,8 +11,6 @@ from menuclasses.not_implemented_item import NotImplementedItem
 
 
 ###############################
-
-# \/\/\/ CUSTOMER ACCOUNT MENU \/\/\/
 
 def account_menu(context: dict):
     menu = ConsoleMenu('Account Information', exit_option_text='Return to Main Menu')
