@@ -1,4 +1,4 @@
-"""These functions might be gerneralizable for reuse."""
+"""This functions might be gerneralizable for reuse."""
 
 from consolemenu.screen import Screen
 
