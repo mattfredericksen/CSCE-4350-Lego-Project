@@ -1,7 +1,7 @@
 """These functions might be gerneralizable for reuse."""
 
 from menus.selection_menu import SelectionMenuFromTuples
-from .details import brick_details, set_details
+from .details import details
 
 from typing import Literal
 
@@ -25,7 +25,4 @@ def browse(mode: Literal['Set', 'Brick']):
         browser.show()
         if browser.selected_item is browser.exit_item:
             break
-        elif mode is 'Set':
-            set_details(browser.selected_item.index)
-        else:
-            brick_details(browser.selected_item.index)
+        details(browser.selected_item.index, mode)
