@@ -4,17 +4,21 @@ from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem
 
 from menuclasses.not_implemented_item import NotImplementedItem
-from menufunctions.sale import sale
+from .sale_menu import sale_menu
+from .store_menu import store_menu
 
 
 def employee_main_menu(context: dict):
     menu = ConsoleMenu('Welcome, working-class scum',
                        exit_option_text='Log Out')
 
-    for item in (FunctionItem('Start a Sale', sale, (context,)),
+    for item in (FunctionItem('Start a Sale', sale_menu, (context,)),
                  NotImplementedItem('Start a Return'),
-                 NotImplementedItem('Order Management'),
-                 NotImplementedItem('Delivery Management')):
+                 NotImplementedItem('Inventory Management'),  # order/delivery
+                 NotImplementedItem('Employee Management'),
+                 FunctionItem('Store Management', store_menu, (context,)),
+                 NotImplementedItem('Reports')):
+
         menu.append_item(item)
     menu.show()
 
