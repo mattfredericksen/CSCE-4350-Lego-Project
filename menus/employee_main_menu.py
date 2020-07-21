@@ -1,3 +1,5 @@
+"""This is the menu that employees see upon logging in."""
+
 from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem, SubmenuItem
 
@@ -5,9 +7,8 @@ from .not_implemented_item import NotImplementedItem
 from menufunctions.sale import sale
 
 
-# \/\/\/\/ MAIN MENU \/\/\/\/
-
-employee_main_menu = ConsoleMenu('Welcome, working-class scum', exit_option_text='Log Out')
+employee_main_menu = ConsoleMenu('Welcome, working-class scum',
+                                 exit_option_text='Log Out')
 
 for item in (FunctionItem('Start a Sale', sale),
              NotImplementedItem('Start a Return'),

@@ -1,3 +1,5 @@
+"""This menu is shown when customers select "Browse Bricks & Sets"."""
+
 from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem
 

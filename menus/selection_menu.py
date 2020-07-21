@@ -6,10 +6,18 @@ from os import get_terminal_size
 
 
 class SelectionMenuFromTuples(SelectionMenu):
-    """Used for manually providing indexes to list items"""
+    """Used for manually providing indexes to list items
+
+    This class is useful since we often want a meaningful
+    item id returned from the selection menu.
+    """
+
     # partially copied from SelectionMenu's __init__()
     def __init__(self, tuples, title=None, subtitle=None, screen=None, formatter=None,
                  prologue_text=None, epilogue_text=None, show_exit_option=True, exit_option_text='Exit'):
+
+        # menu width is at least 80 expanding as necessary to fit strings
+        # this expansion halts at terminal width
         if not formatter:
             width = min(get_terminal_size().columns, max(80, max(len(item[1]) for item in tuples) + 18))
             dimension = Dimension(width=width)

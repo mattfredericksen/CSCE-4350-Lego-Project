@@ -11,6 +11,7 @@ def details(item_id, mode: Literal['Set', 'Brick']):
     while True:
         print('ITEM DETAILS\n')
 
+        # display the attributes corresponding to the item type
         if mode is 'Set':
             item = sets[item_id]
             print(f'Name: {item["name"]}',
@@ -24,20 +25,16 @@ def details(item_id, mode: Literal['Set', 'Brick']):
                   f'Price: ${item["price"]}',
                   f'Inventory: {item["inventory"]}', sep='\n')
 
-        print('\n')  # two newlines
-
-        if item['inventory'] > 0:
-            print('Enter a quantity to add this item to your cart.')
-        else:
-            print('This item is out of stock at your preferred store.')
-
-        print('Enter nothing to return to browsing.\n')
+        print('\nEnter a quantity to add this item to your cart.\n'
+              'Enter nothing to return to browsing.\n')
 
         if not (choice := input('>> ')):
+            # if the user enters nothing, return to browsing menu
             break
         try:
             choice = int(choice)
         except ValueError:
+            # if the user enters NaN, just reprompt
             Screen.clear()
         else:
             if choice > 0:
