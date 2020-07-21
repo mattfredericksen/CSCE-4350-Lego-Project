@@ -1,9 +1,9 @@
-"""For more information, visit https://bit.ly/32Dx2hf"""
+"""For more information, visit https://bit.ly/2Cp05L7"""
 
 from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem
 from consolemenu.screen import Screen
-from menus.selection_menu import SelectionMenuFromTuples
+from menuclasses.selection_menu import SelectionMenuFromTuples
 
 from typing import Literal
 
