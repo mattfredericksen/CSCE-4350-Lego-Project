@@ -10,7 +10,7 @@ from typing import Literal
 from test_data.static import sets, bricks
 
 
-def add(sale_items: dict, mode: Literal['Set', 'Brick']) -> None:
+def add(context: dict, sale_items: dict, mode: Literal['Set', 'Brick']) -> None:
     """Add an item to the current sale"""
 
     # exit loop when user enters nothing
@@ -47,7 +47,7 @@ def add(sale_items: dict, mode: Literal['Set', 'Brick']) -> None:
         print(f'Added {quantity} items to the sale.\n')
 
 
-def remove(sale_items: dict) -> None:
+def remove(context: dict, sale_items: dict) -> None:
     """Remove an item from the current sale"""
 
     sale_sets, sale_bricks = sale_items['sets'], sale_items['bricks']
@@ -98,7 +98,7 @@ def remove(sale_items: dict) -> None:
             menu.remove_item(menu_item)
 
 
-def print_sale(sale_items: dict, title: str) -> None:
+def print_sale(context: dict, sale_items: dict, title: str) -> None:
     """Print current sale items in a receipt-like format"""
     total_quantity = 0
     total_price = 0.0
@@ -122,13 +122,13 @@ def print_sale(sale_items: dict, title: str) -> None:
     print(f'| Price: ${total_price:,.2f}')
 
 
-def view(sale_items: dict) -> None:
+def view(context: dict, sale_items: dict) -> None:
     """Print the sale. No modification."""
     print_sale(sale_items, 'SALE IN PROGRESS')
     input('\nPress [enter] to return to the sale.')
 
 
-def complete(sale_items: dict) -> bool:
+def complete(context: dict, sale_items: dict) -> bool:
     # choose payment option
     # process payment
     # record sale in database
@@ -136,7 +136,7 @@ def complete(sale_items: dict) -> bool:
     pass
 
 
-def confirm_exit(sale_items: dict) -> bool:
+def confirm_exit(context: dict, sale_items: dict) -> bool:
     """Confirm exiting of sale when items have been entered.
     Returns True if exit should occur, False otherwise
     """
@@ -156,7 +156,7 @@ def confirm_exit(sale_items: dict) -> bool:
             Screen.clear()
 
 
-def sale():
+def sale(context: dict):
     """Display main sale menu"""
 
     # sale context is maintained across menu functions
@@ -164,15 +164,17 @@ def sale():
 
     menu = ConsoleMenu('Sale In Progress', show_exit_option=False)
     for item in (FunctionItem('Add sets to sale', add,
-                              (sale_items['sets'], 'Set')),
+                              (context, sale_items['sets'], 'Set')),
                  FunctionItem('Add bricks to sale', add,
-                              (sale_items['bricks'], 'Brick')),
-                 FunctionItem('Remove items from sale', remove, (sale_items,)),
-                 FunctionItem('View current sale items', view, (sale_items,)),
-                 FunctionItem('Complete sale', complete, (sale_items,),
-                              should_exit=True),
-                 FunctionItem('Cancel sale', confirm_exit, (sale_items,),
-                              should_exit=True)):
+                              (context, sale_items['bricks'], 'Brick')),
+                 FunctionItem('Remove items from sale', remove,
+                              (context, sale_items)),
+                 FunctionItem('View current sale items', view,
+                              (context, sale_items)),
+                 FunctionItem('Complete sale', complete,
+                              (context, sale_items), should_exit=True),
+                 FunctionItem('Cancel sale', confirm_exit,
+                              (context, sale_items), should_exit=True)):
         menu.append_item(item)
 
     while not menu.returned_value:

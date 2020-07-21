@@ -7,7 +7,7 @@ from typing import Literal
 from test_data.static import bricks, sets
 
 
-def details(item_id, mode: Literal['Set', 'Brick']):
+def details(context: dict, item_id: int, mode: Literal['Set', 'Brick']):
     while True:
         print('ITEM DETAILS\n')
 

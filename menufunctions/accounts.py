@@ -13,11 +13,15 @@ def login():
     password = getpass('password: ')
 
     # TODO: log into SQL server
+    #       store credentials in `context` dict
+    context = {'username': username,
+               'password': password}
+
     # Assuming success:
     if input("Are you an employee? (don't lie) [y/n]: ").lower() in ('yes', 'ye', 'y'):
-        employee_main_menu.show()
+        employee_main_menu(context)
     else:
-        main_menu.show()
+        main_menu(context)
 
     # TODO: open a different menu based on capabilities of user
     #       (online mode vs store mode)
@@ -33,11 +37,13 @@ def create_account():
         password = getpass('new password: ')
 
     # TODO: get the rest of user account info
-
-    # TODO: create normal user account in SQL database
+    #       create normal user account in SQL database
+    #       store credentials in context
+    context = {'username': username,
+               'password': password}
 
     Screen.clear()
     input('Account created!\n\n'
           'Press [enter] to continue to The Lego Store.')
 
-    main_menu.show()
+    main_menu(context)

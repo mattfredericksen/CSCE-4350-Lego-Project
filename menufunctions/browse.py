@@ -8,7 +8,7 @@ from typing import Literal
 from test_data.static import bricks, sets
 
 
-def browse(mode: Literal['Set', 'Brick']):
+def browse(context: dict, mode: Literal['Set', 'Brick']):
     """Display a menu with all available Sets or Bricks.
     When the user selects an item, its details are displayed
     with an option to add that item to their cart.
@@ -36,4 +36,4 @@ def browse(mode: Literal['Set', 'Brick']):
 
         if browser.selected_item is browser.exit_item:
             break
-        details(browser.selected_item.index, mode)
+        details(context, browser.selected_item.index, mode)

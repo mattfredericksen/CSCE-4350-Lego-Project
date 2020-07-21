@@ -8,7 +8,7 @@ from .details import details
 from test_data.static import bricks, sets
 
 
-def search():
+def search(context: dict):
     query = input('Search Query: ')
 
     # Create the strings that will be fuzzy-searched. For sets,
