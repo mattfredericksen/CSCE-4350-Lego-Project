@@ -17,9 +17,9 @@ def browse(context: dict, mode: Literal['Set', 'Brick']):
     instructions = 'Select an item to view more details or '  \
                    'to add it to your cart.'
     if mode is 'Set':
-        items = [(key, value['name']) for key, value in sets.items()]
+        items = [(item_id, item['name']) for item_id, item in sets.items()]
     else:
-        items = [(key, value['description']) for key, value in bricks.items()]
+        items = [(item_id, item['description']) for item_id, item in bricks.items()]
 
     browser = SelectionMenuFromTuples(items, title=f'Browse {mode}s',
                                       prologue_text=instructions,
