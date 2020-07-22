@@ -32,8 +32,8 @@ def create(context: dict):
 
 def remove(context: dict):
     print('REMOVE EMPLOYEE IN STORE #{store_id}\n')
-    emps = tuple((eid, f'(ID: {eid}) {e["name"]}')
-                 for eid, e in employees.items() if e['store'] == context['store'])
+    emps = [(eid, f'(ID: {eid}) {e["name"]}')
+            for eid, e in employees.items() if e['store'] == context['store']]
     menu = SelectionMenuFromTuples(emps, 'REMOVE EMPLOYEE',
                                    exit_option_text='Cancel')
     menu.show()
