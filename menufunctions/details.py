@@ -12,6 +12,7 @@ def details(context: dict, item_id: int, mode: Literal['Set', 'Brick']):
         print('ITEM DETAILS\n')
 
         # display the attributes corresponding to the item type
+        print(f'Item ID: {item_id}')
         if mode is 'Set':
             item = sets[item_id]
             print(f'Name: {item["name"]}',
@@ -28,20 +29,22 @@ def details(context: dict, item_id: int, mode: Literal['Set', 'Brick']):
         print('\nEnter a quantity to add this item to your cart.\n'
               'Enter nothing to return to browsing.\n')
 
-        if not (choice := input('>> ')):
+        if not (quantity := input('>> ')):
             # if the user enters nothing, return to browsing menu
             break
         try:
-            choice = int(choice)
+            quantity = int(quantity)
         except ValueError:
             # if the user enters NaN, just reprompt
             Screen.clear()
         else:
-            if choice > 0:
+            if quantity > 0:
                 # TODO: run SQL to add stuff to cart
+                cart_items = context['cart'][mode.lower() + 's']
+                cart_items[item_id] = cart_items.get(item_id, 0) + quantity
                 Screen.clear()
                 input('Added item(s) to cart (not really).\n\n'
                       'Press [enter] to return to browsing.')
                 break
-            elif choice == 0:
+            elif quantity == 0:
                 break

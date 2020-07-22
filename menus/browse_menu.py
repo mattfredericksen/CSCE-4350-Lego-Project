@@ -8,6 +8,8 @@ from menufunctions.search import search
 
 
 def browse_menu(context: dict):
+    context.setdefault('cart', {'sets': {}, 'bricks': {}})
+
     menu = ConsoleMenu('Browse & Search LEGO Products',
                        exit_option_text='Return to Main Menu')
 
