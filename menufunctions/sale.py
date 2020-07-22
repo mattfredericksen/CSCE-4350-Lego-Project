@@ -115,7 +115,7 @@ def print_sale(context: dict, sale_items: dict,
         total_quantity += quantity
         total_price += item['price'] * quantity
         price = f'${item["price"]:.2f}'
-        print(f'{quantity:8} | {price:>10} | {item["name"]}')
+        print(f'{quantity:8} | {price:>10} | {item["description"]}')
     print('\nTotals\n'
           '------\n'
           f'| Quantity: {total_quantity}\n'
