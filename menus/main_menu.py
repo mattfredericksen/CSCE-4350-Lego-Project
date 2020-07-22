@@ -17,7 +17,7 @@ def main_menu(context: dict):
                        exit_option_text='Log Out')
 
     for item in (FunctionItem('Browse Bricks & Sets', browse_menu, [context]),
-                 FunctionItem('Checkout', checkout, [context]),
+                 FunctionItem('Checkout Cart', checkout, [context]),
                  FunctionItem('Order History', order_menu, [context]),
                  FunctionItem('Account Information', account_menu, [context])):
         menu.append_item(item)
