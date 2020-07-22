@@ -26,25 +26,32 @@ def details(context: dict, item_id: int, mode: Literal['Set', 'Brick']):
                   f'Price: ${item["price"]}',
                   f'Inventory: {item["inventory"]}', sep='\n')
 
-        print('\nEnter a quantity to add this item to your cart.\n'
-              'Enter nothing to return to browsing.\n')
+        print('\nSet the item quantity for your cart.\n'
+              'Enter nothing to return.\n')
 
         if not (quantity := input('>> ')):
-            # if the user enters nothing, return to browsing menu
-            break
+            # if the user enters nothing, return to previous menu
+            return
         try:
             quantity = int(quantity)
         except ValueError:
-            # if the user enters NaN, just reprompt
-            Screen.clear()
+            pass
         else:
+            cart = context['cart'][mode.lower() + 's']
             if quantity > 0:
-                # TODO: run SQL to add stuff to cart
-                cart_items = context['cart'][mode.lower() + 's']
-                cart_items[item_id] = cart_items.get(item_id, 0) + quantity
+                # TODO: run SQL to modify stuff in cart
+                cart[item_id] = quantity
                 Screen.clear()
-                input('Added item(s) to cart (not really).\n\n'
-                      'Press [enter] to return to browsing.')
-                break
+                input('Item quantity has been set in your cart.\n\n'
+                      'Press [enter] to return.')
+                return quantity
             elif quantity == 0:
-                break
+                if item_id in cart:
+                    # TODO: run SQL to remove stuff from cart
+                    del cart[item_id]
+                    Screen.clear()
+                    input('Item has been removed from your cart.\n\n'
+                          'Press [enter] to return.')
+                return quantity
+        # if the user enters NaN or <0, just re-prompt
+        Screen.clear()
