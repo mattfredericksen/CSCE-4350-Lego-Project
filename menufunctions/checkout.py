@@ -12,11 +12,6 @@ def select_payment(context: dict):
 
 
 def checkout(context: dict):
-    items = [(i, f'(Qty: {q}) {sets[i]["name"]}')
-             for i, q in context['cart']['sets'].items()] + \
-            [(i, f'(Qty: {q}) {bricks[i]["description"]}')
-             for i, q in context['cart']['bricks'].items()]
-
     instructions = 'Select an item to modify its quantity.'
     menu = ConsoleMenu('Checkout', exit_option_text='Return to Main Menu',
                        prologue_text=instructions,
