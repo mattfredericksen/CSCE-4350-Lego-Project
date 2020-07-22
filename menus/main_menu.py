@@ -1,16 +1,24 @@
+"""This is the first menu customers see upon logging in."""
+
 from consolemenu import ConsoleMenu
-from consolemenu.items import FunctionItem, SubmenuItem
+from consolemenu.items import FunctionItem
 
 from .customer_account_menu import account_menu
 from .browse_menu import browse_menu
-from .not_implemented_item import NotImplementedItem
+from menufunctions.checkout import checkout
+from .order_menu import order_menu
+from menuclasses.not_implemented_item import NotImplementedItem
 
-# \/\/\/\/ MAIN MENU \/\/\/\/
 
-main_menu = ConsoleMenu('Welcome to The Lego Store', exit_option_text='Log Out')
+def main_menu(context: dict):
+    context.setdefault('cart', {'sets': {}, 'bricks': {}})
 
-for item in (SubmenuItem('Browse Bricks & Sets', browse_menu),
-             NotImplementedItem('Checkout'),
-             NotImplementedItem('Order History'),
-             SubmenuItem('Account Information', account_menu)):
-    main_menu.append_item(item)
+    menu = ConsoleMenu('Welcome to The Lego Store',
+                       exit_option_text='Log Out')
+
+    for item in (FunctionItem('Browse Bricks & Sets', browse_menu, [context]),
+                 FunctionItem('Checkout', checkout, [context]),
+                 FunctionItem('Order History', order_menu, [context]),
+                 FunctionItem('Account Information', account_menu, [context])):
+        menu.append_item(item)
+    menu.show()
