@@ -56,7 +56,7 @@ def remove(context: dict, sale_items: dict) -> None:
             [(i, f'(Qty: {q}) {bricks[i]["description"]}')
              for i, q in sale_bricks.items()]
 
-    menu = SelectionMenuFromTuples(items, title="Remove Items from Sale",
+    menu = SelectionMenuFromTuples(items, 'Remove Items from Sale',
                                    exit_option_text='Return to Sale')
     while True:
         menu.show()
@@ -96,13 +96,14 @@ def remove(context: dict, sale_items: dict) -> None:
             menu.remove_item(menu_item)
 
 
-def print_sale(context: dict, sale_items: dict, title: str) -> None:
+def print_sale(context: dict, sale_items: dict,
+               title: str, prompt: str) -> str:
     """Print current sale items in a receipt-like format"""
     total_quantity = 0
     total_price = 0.0
-    print(title, '\n')
-    print('Quantity | Unit Price | Items')
-    print('-------- | ---------- | ---------------')
+    print(title, '\n\n'
+          'Quantity | Unit Price | Item\n'
+          '-------- | ---------- | ---------------')
     for item_id, quantity in sale_items['sets'].items():
         item = sets[item_id]
         total_quantity += quantity
@@ -115,15 +116,17 @@ def print_sale(context: dict, sale_items: dict, title: str) -> None:
         total_price += item['price'] * quantity
         price = f'${item["price"]:.2f}'
         print(f'{quantity:8} | {price:>10} | {item["name"]}')
-    print('\nTotals\n------')
-    print(f'| Quantity: {total_quantity}')
-    print(f'| Price: ${total_price:,.2f}')
+    print('\nTotals\n'
+          '------\n'
+          f'| Quantity: {total_quantity}\n'
+          f'| Price: ${total_price:,.2f}\n')
+    return input(prompt).lower()
 
 
 def view(context: dict, sale_items: dict) -> None:
     """Print the sale. No modification."""
-    print_sale(context, sale_items, 'SALE IN PROGRESS')
-    input('\nPress [enter] to return to the sale.')
+    print_sale(context, sale_items, 'SALE IN PROGRESS',
+               'Press [enter] to return to the sale.')
 
 
 def complete(context: dict, sale_items: dict) -> bool:
@@ -144,9 +147,9 @@ def confirm_exit(context: dict, sale_items: dict) -> bool:
         return True
 
     while True:
-        print_sale(context, sale_items, 'CONFIRM SALE CANCELLATION')
-        answer = input('\nAre you sure you want to cancel this sale? [y/n]: ')
-        if (answer := answer.lower()) in ('y', 'ye', 'yes'):
+        answer = print_sale(context, sale_items, 'CONFIRM SALE CANCELLATION',
+                            'Are you sure you want to cancel this sale? [y/n]: ')
+        if answer in ('y', 'ye', 'yes'):
             return True
         elif answer in ('n', 'no'):
             return False
