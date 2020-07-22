@@ -30,9 +30,9 @@ def search(context: dict):
     # Unfortunately, we have to recompute whether
     # a match is a set or a brick.
     # Match tuples are (choice, score, key)
-    matches = tuple((i := match[2],
-                     (sets[i]['name'] if i in sets else bricks[i]['description']))
-                    for match in matches)
+    matches = [(i := match[2],
+               (sets[i]['name'] if i in sets else bricks[i]['description']))
+               for match in matches]
 
     instructions = 'Select an item to view more details or ' \
                    'to add it to your cart'
@@ -55,6 +55,6 @@ def search(context: dict):
             # check whether the selection is a set or a brick
             # and display item details
             if (i := browser.selected_item.index) in sets:
-                details(i, 'Set')
+                details(context, i, 'Set')
             else:
-                details(i, 'Brick')
+                details(context, i, 'Brick')
