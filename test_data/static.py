@@ -389,3 +389,26 @@ employees = {
     8:  {'name': 'Caleb D Crosley', 'store': 3},
     9:  {'name': 'Nick M Gonzalez', 'store': 3}
 }
+
+orders = {
+    1: {'date': '2020-04-01 12:41:03', 'status': 'Delivered', 'price': 2.2,
+        'items': {
+            'sets': {8444: 3},
+            'bricks': {}
+        }},
+    2: {'date': '2020-05-08 13:42:04', 'status': 'Delivered', 'price': 6.66,
+        'items': {
+            'sets': {9445: 1},
+            'bricks': {605: 10, 609: 2}
+        }},
+    3: {'date': '2020-06-15 14:43:05', 'status': 'Delivered', 'price': 123.21,
+        'items': {
+            'sets': {},
+            'bricks': {}
+        }},
+    4: {'date': '2020-07-22 15:44:06', 'status': 'Shipping', 'price': 43.21,
+        'items': {
+            'sets': {},
+            'bricks': {}
+        }},
+}
