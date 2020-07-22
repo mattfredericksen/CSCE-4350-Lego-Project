@@ -10,12 +10,14 @@ from menuclasses.not_implemented_item import NotImplementedItem
 
 
 def main_menu(context: dict):
+    context.setdefault('cart', {'sets': {}, 'bricks': {}})
+
     menu = ConsoleMenu('Welcome to The Lego Store',
                        exit_option_text='Log Out')
 
-    for item in (FunctionItem('Browse Bricks & Sets', browse_menu, (context,)),
-                 FunctionItem('Checkout', checkout, (context,)),
+    for item in (FunctionItem('Browse Bricks & Sets', browse_menu, [context]),
+                 FunctionItem('Checkout', checkout, [context]),
                  NotImplementedItem('Order History'),
-                 FunctionItem('Account Information', account_menu, (context,))):
+                 FunctionItem('Account Information', account_menu, [context])):
         menu.append_item(item)
     menu.show()

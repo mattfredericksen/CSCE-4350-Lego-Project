@@ -8,13 +8,11 @@ from menufunctions.search import search
 
 
 def browse_menu(context: dict):
-    context.setdefault('cart', {'sets': {}, 'bricks': {}})
-
     menu = ConsoleMenu('Browse & Search LEGO Products',
                        exit_option_text='Return to Main Menu')
 
     for item in (FunctionItem('Browse Bricks', browse, (context, 'Brick')),
                  FunctionItem('Browse Sets', browse, (context, 'Set')),
-                 FunctionItem('Search All', search, (context,))):
+                 FunctionItem('Search All', search, [context])):
         menu.append_item(item)
     menu.show()
