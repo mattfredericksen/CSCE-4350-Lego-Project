@@ -93,8 +93,8 @@ CREATE TABLE Customer_Orders (
 	customer_id INT NOT NULL,
 	card_number CHAR(16) NOT NULL,
     store_id INT NOT NULL,
-	order_timestamp DATETIME,
-	delivery_timestamp DATETIME,
+	order_timestamp TIMESTAMP,
+	delivery_timestamp TIMESTAMP,
 	status VARCHAR(16) NOT NULL,
 	total_price FLOAT NOT NULL,
 	PRIMARY KEY (order_id),
@@ -111,7 +111,7 @@ CREATE TABLE Customer_Orders (
 CREATE TABLE Customer_Order_Returns (
 	order_id INT NOT NULL,
 	reason VARCHAR(256),
-	timestamp DATETIME NOT NULL,
+	return_timestamp TIMESTAMP NOT NULL,
 	FOREIGN KEY (order_id) REFERENCES Customer_Orders (order_id),
     PRIMARY KEY (order_id)
 );
@@ -140,7 +140,7 @@ CREATE TABLE Store_Sales (
 	sale_id INT NOT NULL AUTO_INCREMENT,
 	store_id INT NOT NULL,
 	employee_id INT NOT NULL,
-	sale_timestamp DATETIME NOT NULL,
+	sale_timestamp TIMESTAMP NOT NULL,
 	total_price FLOAT NOT NULL,
     credit_card CHAR(16),
 	PRIMARY KEY (sale_id),
@@ -152,7 +152,7 @@ CREATE TABLE Store_Sales (
 CREATE TABLE Store_Sales_Returns (
 	sale_id INT NOT NULL,
 	reason VARCHAR(256),
-	return_timestamp DATETIME NOT NULL,
+	return_timestamp TIMESTAMP NOT NULL,
 	FOREIGN KEY (sale_id) REFERENCES Store_Sales (sale_id),
     PRIMARY KEY (sale_id)
 );
@@ -187,8 +187,8 @@ CREATE TABLE Store_Orders (
 	order_id INT NOT NULL AUTO_INCREMENT,
 	store_id INT NOT NULL,
 	supplier_id INT NOT NULL,
-	order_timestamp DATETIME,
-	delivery_timestamp DATETIME,
+	order_timestamp TIMESTAMP,
+	delivery_timestamp TIMESTAMP,
 	status VARCHAR(16) NOT NULL,
 	PRIMARY KEY (order_id),
 	FOREIGN KEY (store_id) REFERENCES Stores (store_id),
