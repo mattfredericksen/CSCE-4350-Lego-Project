@@ -1,4 +1,4 @@
-CREATE database LegoCo
+CREATE database LegoCo;
 
 
 CREATE TABLE Stores (
