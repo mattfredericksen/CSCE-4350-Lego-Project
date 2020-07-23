@@ -5,7 +5,7 @@ CREATE TABLE Stores (
 	store_id INT NOT NULL AUTO_INCREMENT,
 	address VARCHAR(256) NOT NULL,
 	manager_id INT,
-    active BOOLEAN NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
 	  /* because we don't want to lose a
 	     store's history if the store is closed */
     PRIMARY KEY (store_id)
@@ -15,7 +15,7 @@ CREATE TABLE Employees (
     employee_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(256) NOT NULL,
     store_id INT NOT NULL,
-    active BOOLEAN NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
     PRIMARY KEY (employee_id),
     FOREIGN KEY (store_id) REFERENCES Stores (store_id)
 );
@@ -27,7 +27,7 @@ CREATE TABLE Sets (
 	set_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(128) NOT NULL,
 	description VARCHAR(512) NOT NULL,
-    active BOOLEAN,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
 	PRIMARY KEY (set_id)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE Bricks (
 	brick_id INT NOT NULL AUTO_INCREMENT,
 	description VARCHAR(256) NOT NULL,
     price FLOAT NOT NULL,
-    active BOOLEAN,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
 	PRIMARY KEY (brick_id),
     CHECK (price > 0.0)
 );
@@ -87,7 +87,7 @@ CREATE TABLE Payments (
 	card_number CHAR(16) NOT NULL,
 	exp_date DATE NOT NULL,
 	billing_address VARCHAR(256) NOT NULL,
-	active BOOLEAN NOT NULL,
+	active BOOLEAN NOT NULL DEFAULT TRUE,
 		/* because this data should be retained in case a customer
            removes this payment method and then cancels an order,
            so we can still perform the refund */
@@ -118,7 +118,7 @@ CREATE TABLE Customer_Orders (
 CREATE TABLE Customer_Order_Returns (
 	order_id INT NOT NULL,
 	reason VARCHAR(256),
-	return_timestamp TIMESTAMP NOT NULL,
+	return_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
 	FOREIGN KEY (order_id) REFERENCES Customer_Orders (order_id),
     PRIMARY KEY (order_id)
 );
@@ -147,7 +147,7 @@ CREATE TABLE Store_Sales (
 	sale_id INT NOT NULL AUTO_INCREMENT,
 	store_id INT NOT NULL,
 	employee_id INT NOT NULL,
-	sale_timestamp TIMESTAMP NOT NULL,
+	sale_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
 	total_price FLOAT NOT NULL,
     credit_card CHAR(16),
 	PRIMARY KEY (sale_id),
@@ -159,7 +159,7 @@ CREATE TABLE Store_Sales (
 CREATE TABLE Store_Sales_Returns (
 	sale_id INT NOT NULL,
 	reason VARCHAR(256),
-	return_timestamp TIMESTAMP NOT NULL,
+	return_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
 	FOREIGN KEY (sale_id) REFERENCES Store_Sales (sale_id),
     PRIMARY KEY (sale_id)
 );
