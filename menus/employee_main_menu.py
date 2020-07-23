@@ -7,9 +7,11 @@ from menuclasses.not_implemented_item import NotImplementedItem
 from .sale_menu import sale_menu
 from .store_menu import store_menu
 from .employee_menu import employee_menu
+from .report_menu import report_menu
 
 
 def employee_main_menu(context: dict):
+    # TODO: perhaps add a way for employees to clock in/out
     menu = ConsoleMenu('Welcome, working-class scum',
                        exit_option_text='Log Out')
 
@@ -18,8 +20,7 @@ def employee_main_menu(context: dict):
                  NotImplementedItem('Inventory Management'),  # order/delivery
                  FunctionItem('Employee Management', employee_menu, [context]),
                  FunctionItem('Store Management', store_menu, [context]),
-                 NotImplementedItem('Reports')):
-
+                 FunctionItem('Reports', report_menu, [context])):
         menu.append_item(item)
     menu.show()
 
