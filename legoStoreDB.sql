@@ -126,3 +126,59 @@ CREATE TABLE OrderBricks (
 	FOREIGN KEY (orderID) REFERENCES onlineOrders (orderID),
 	FOREIGN KEY (partID) REFERENCES Bricks (partID)
 );
+
+CREATE TABLE Supplier (
+	supplierID int NOT NULL,
+	name varchar(255) NOT NULL,
+	PRIMARY KEY (supplierID)
+);
+
+CREATE TABLE StoreOrder (
+	storeOrderID int NOT NULL,
+	storeID int,
+	supplierID int,
+	orderTimestamp varchar(255) NOT NULL,
+	deliveryTimestamp varchar(255) NOT NULL,
+	status varchar(255) NOT NULL,
+	PRIMARY KEY (storeOrderID),
+	FOREIGN KEY (storeID) REFERENCES Store (storeID),
+	FOREIGN KEY (supplierID) REFERENCES Supplier (supplierID)
+);
+
+CREATE TABLE StoreOrderBricks (
+	storeOrderID int,
+	partID int,
+	quantity int NOT NULL,
+	FOREIGN KEY (storeOrderID) REFERENCES StoreOrder (storeOrderID),
+	FOREIGN KEY (partID) REFERENCES Bricks (partID)
+);
+
+CREATE TABLE StoreOrderSets (
+	storeOrderID int,
+	setID int,
+	quantity int NOT NULL,
+	FOREIGN KEY (storeOrderID) REFERENCES StoreOrder (storeOrderID),
+	FOREIGN KEY (setID) REFERENCES legoSets (setID)
+);
+
+CREATE TABLE CustomerOrderReturn (
+	orderID int,
+	reason varchar(255),
+	timestamp varchar(255) NOT NULL,
+	FOREIGN KEY (orderID) REFERENCES onlineOrders (orderID)	
+);
+
+CREATE TABLE StoreSaleReturn (
+	orderID int,
+	reason varchar(255),
+	timestamp varchar(255) NOT NULL,
+	FOREIGN KEY (orderID) REFERENCES inStoreSales (saleID)	
+);
+
+CREATE TABLE SetBricks (
+	setID int,
+	brickID int,
+	quantity int,
+	FOREIGN KEY (setID) REFERENCES legoSets (setID),
+	FOREIGN KEY (brickID) REFERENCES Bricks (partID)
+);
