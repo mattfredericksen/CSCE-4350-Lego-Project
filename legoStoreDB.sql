@@ -23,14 +23,6 @@ CREATE TABLE Employees (
 ALTER TABLE Stores
 ADD FOREIGN KEY (manager_id) REFERENCES Employees (employee_id);
 
-CREATE TABLE Sets (
-	set_id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(128) NOT NULL,
-	description VARCHAR(512) NOT NULL,
-    active BOOLEAN NOT NULL DEFAULT TRUE,
-	PRIMARY KEY (set_id)
-);
-
 CREATE TABLE Bricks (
 	brick_id INT NOT NULL AUTO_INCREMENT,
 	description VARCHAR(256) NOT NULL,
@@ -39,6 +31,19 @@ CREATE TABLE Bricks (
 	PRIMARY KEY (brick_id),
     CHECK (price > 0.0)
 );
+
+-- Attempt to prevent Bricks & Sets ID's from overlapping
+ALTER TABLE Bricks AUTO_INCREMENT=1000;
+
+CREATE TABLE Sets (
+	set_id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(128) NOT NULL,
+	description VARCHAR(512) NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+	PRIMARY KEY (set_id)
+);
+
+ALTER TABLE Sets AUTO_INCREMENT=10000;
 
 CREATE TABLE Set_Bricks (
 	set_id INT NOT NULL,
