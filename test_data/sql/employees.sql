@@ -1,14 +1,50 @@
-INSERT INTO Employees (name, store_id)
-VALUES
-    ('Matthew Fredrickson', 1),
-    ('Jeremy Kracy', 1),
-    ('Austin Reeves', 1),
-    ('Jack M Kerr', 2),
-    ('Earl S Huhn', 2),
-    ('Kim R Hartman', 2),
-    ('Mabel P Brown', 2),
-    ('James B Martinez', 3),
-    ('Janice F Rutherford', 3),
-    ('Phyllis C Hallett', 3),
-    ('Caleb D Crosley', 3),
-    ('Nick M Gonzalez', 3);
+insert into Employees (name, store_id, active) values ('Kameko Crowd', 2, false);
+insert into Employees (name, store_id, active) values ('Garrott Stribbling', 3, false);
+insert into Employees (name, store_id, active) values ('Aylmer Keenlyside', 4, true);
+insert into Employees (name, store_id, active) values ('Allys Scragg', 5, true);
+insert into Employees (name, store_id, active) values ('Franchot Yeskin', 1, false);
+insert into Employees (name, store_id, active) values ('Torin Patshull', 2, false);
+insert into Employees (name, store_id, active) values ('Amitie Vasyushkhin', 3, false);
+insert into Employees (name, store_id, active) values ('Lilias Painter', 4, true);
+insert into Employees (name, store_id, active) values ('Blanca Gueny', 5, true);
+insert into Employees (name, store_id, active) values ('Knox Jenkins', 1, true);
+insert into Employees (name, store_id, active) values ('Nil Pickrill', 2, true);
+insert into Employees (name, store_id, active) values ('Charissa Potebury', 3, false);
+insert into Employees (name, store_id, active) values ('Sammie Norgan', 4, false);
+insert into Employees (name, store_id, active) values ('Evin Christy', 5, false);
+insert into Employees (name, store_id, active) values ('Jeanie Skala', 1, false);
+insert into Employees (name, store_id, active) values ('Graehme Brosetti', 2, false);
+insert into Employees (name, store_id, active) values ('Elizabet Lukacs', 3, false);
+insert into Employees (name, store_id, active) values ('Rosaleen Pegden', 4, false);
+insert into Employees (name, store_id, active) values ('Banky Ashlee', 5, true);
+insert into Employees (name, store_id, active) values ('Fletcher Burnyeat', 1, false);
+insert into Employees (name, store_id, active) values ('Benoite Gullberg', 2, false);
+insert into Employees (name, store_id, active) values ('Jordan Hawke', 3, false);
+insert into Employees (name, store_id, active) values ('Rudyard Alberti', 4, true);
+insert into Employees (name, store_id, active) values ('Frankie Eymer', 5, false);
+insert into Employees (name, store_id, active) values ('Minne Jerrems', 1, false);
+insert into Employees (name, store_id, active) values ('Godfry Masselin', 2, true);
+insert into Employees (name, store_id, active) values ('Gibbie Hibling', 3, true);
+insert into Employees (name, store_id, active) values ('Sarina Krolak', 4, false);
+insert into Employees (name, store_id, active) values ('Lindy Guillon', 5, false);
+insert into Employees (name, store_id, active) values ('Dagmar Cadwell', 1, true);
+insert into Employees (name, store_id, active) values ('Lotty Kisbey', 2, true);
+insert into Employees (name, store_id, active) values ('Ruthanne Mesias', 3, true);
+insert into Employees (name, store_id, active) values ('Olav Jeffcoat', 4, true);
+insert into Employees (name, store_id, active) values ('Faye Siberry', 5, false);
+insert into Employees (name, store_id, active) values ('Dorey Lensch', 1, false);
+insert into Employees (name, store_id, active) values ('Ashia Morehall', 2, false);
+insert into Employees (name, store_id, active) values ('Meredith Bradburn', 3, false);
+insert into Employees (name, store_id, active) values ('Dukey Pentony', 4, false);
+insert into Employees (name, store_id, active) values ('Randy McNaughton', 5, false);
+insert into Employees (name, store_id, active) values ('Didi Cuffley', 1, true);
+insert into Employees (name, store_id, active) values ('Aimee Gulliman', 2, true);
+insert into Employees (name, store_id, active) values ('Lorin Toun', 3, false);
+insert into Employees (name, store_id, active) values ('Madlen Scholar', 4, false);
+insert into Employees (name, store_id, active) values ('Trudie Sandeland', 5, false);
+insert into Employees (name, store_id, active) values ('Christan Eckhard', 1, false);
+insert into Employees (name, store_id, active) values ('Bennett Friberg', 2, false);
+insert into Employees (name, store_id, active) values ('Rene Marton', 3, false);
+insert into Employees (name, store_id, active) values ('Adler Algore', 4, false);
+insert into Employees (name, store_id, active) values ('Veronica Hazael', 5, true);
+insert into Employees (name, store_id, active) values ('Ibrahim Crissil', 1, false);
