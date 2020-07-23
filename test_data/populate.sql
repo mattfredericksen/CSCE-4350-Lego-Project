@@ -1,3 +1,5 @@
+-- scripts in test_data/sql/ might be more current
+
 INSERT INTO Stores (address)
 VALUES
     ('1348 Paul Wayne Haggerty Road, Avondale, LA 70094'),
