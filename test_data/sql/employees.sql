@@ -1,14 +1,50 @@
-INSERT INTO Employees (name, store_id)
-VALUES
-    ('Matthew Fredrickson', 1),
-    ('Jeremy Kracy', 1),
-    ('Austin Reeves', 1),
-    ('Jack M Kerr', 2),
-    ('Earl S Huhn', 2),
-    ('Kim R Hartman', 2),
-    ('Mabel P Brown', 2),
-    ('James B Martinez', 3),
-    ('Janice F Rutherford', 3),
-    ('Phyllis C Hallett', 3),
-    ('Caleb D Crosley', 3),
-    ('Nick M Gonzalez', 3);
+insert into Employees (name, store_id) values ('Frederigo Palister', 2);
+insert into Employees (name, store_id) values ('Dolly Mutch', 3);
+insert into Employees (name, store_id) values ('Dasha Delong', 4);
+insert into Employees (name, store_id) values ('Imojean Brogi', 5);
+insert into Employees (name, store_id) values ('Gizela Borrett', 1);
+insert into Employees (name, store_id) values ('Orazio Ladyman', 2);
+insert into Employees (name, store_id) values ('Meg Mulvagh', 3);
+insert into Employees (name, store_id) values ('Karry Tatton', 4);
+insert into Employees (name, store_id) values ('Floyd MacCollom', 5);
+insert into Employees (name, store_id) values ('Tedmund Sonner', 1);
+insert into Employees (name, store_id) values ('Tam Atley', 2);
+insert into Employees (name, store_id) values ('Cordell Heady', 3);
+insert into Employees (name, store_id) values ('Cathrin Greated', 4);
+insert into Employees (name, store_id) values ('Aili Darinton', 5);
+insert into Employees (name, store_id) values ('Hamlen Steffens', 1);
+insert into Employees (name, store_id) values ('Kirbee Errichelli', 2);
+insert into Employees (name, store_id) values ('Veronika Chaize', 3);
+insert into Employees (name, store_id) values ('Sal Houdmont', 4);
+insert into Employees (name, store_id) values ('Trista Weepers', 5);
+insert into Employees (name, store_id) values ('Zorina Manchester', 1);
+insert into Employees (name, store_id) values ('Shayne Legges', 2);
+insert into Employees (name, store_id) values ('Barth Ballay', 3);
+insert into Employees (name, store_id) values ('Kailey Tomaszewski', 4);
+insert into Employees (name, store_id) values ('Leopold Thonason', 5);
+insert into Employees (name, store_id) values ('Dredi Olyff', 1);
+insert into Employees (name, store_id) values ('Timothea Gocke', 2);
+insert into Employees (name, store_id) values ('Grete Cauley', 3);
+insert into Employees (name, store_id) values ('Donavon Grabbam', 4);
+insert into Employees (name, store_id) values ('Standford Waggatt', 5);
+insert into Employees (name, store_id) values ('Shell Copner', 1);
+insert into Employees (name, store_id) values ('Brandais Blick', 2);
+insert into Employees (name, store_id) values ('Miner McCormack', 3);
+insert into Employees (name, store_id) values ('Franky Coultas', 4);
+insert into Employees (name, store_id) values ('Berke Birtwell', 5);
+insert into Employees (name, store_id) values ('Delainey Joanic', 1);
+insert into Employees (name, store_id) values ('Farrand Payley', 2);
+insert into Employees (name, store_id) values ('Silvie Thinn', 3);
+insert into Employees (name, store_id) values ('Staffard Bacher', 4);
+insert into Employees (name, store_id) values ('Petunia Stockill', 5);
+insert into Employees (name, store_id) values ('Tiffie Faulo', 1);
+insert into Employees (name, store_id) values ('Kessia Keat', 2);
+insert into Employees (name, store_id) values ('Merell Lazenby', 3);
+insert into Employees (name, store_id) values ('Lance Dews', 4);
+insert into Employees (name, store_id) values ('Mick Gussin', 5);
+insert into Employees (name, store_id) values ('Elvyn Clymer', 1);
+insert into Employees (name, store_id) values ('Darrelle McOrkill', 2);
+insert into Employees (name, store_id) values ('Tamarah Bondesen', 3);
+insert into Employees (name, store_id) values ('Moritz Neller', 4);
+insert into Employees (name, store_id) values ('Brice Grishanin', 5);
+insert into Employees (name, store_id) values ('Timi Leaming', 1);

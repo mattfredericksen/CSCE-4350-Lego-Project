@@ -1,5 +1,5 @@
-INSERT INTO Stores (address)
-VALUES
-    ('1348 Paul Wayne Haggerty Road, Avondale, LA 70094'),
-    ('3253 Terra Cotta Street, Ideal Corners, MN 56442'),
-    ('1684 Turkey Pen Road, New York, NY 10038');
+insert into Stores (address, manager_id) values ('5718 Banding Center', 4);
+insert into Stores (address, manager_id) values ('5865 Eagle Crest Road', 5);
+insert into Stores (address, manager_id) values ('0114 Kensington Point', 1);
+insert into Stores (address, manager_id) values ('61608 Bartelt Junction', 2);
+insert into Stores (address, manager_id) values ('8 Prairieview Junction', 3);
