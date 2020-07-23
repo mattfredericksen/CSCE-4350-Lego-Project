@@ -128,7 +128,7 @@ CREATE TABLE Customer_Order_Returns (
     PRIMARY KEY (order_id)
 );
 
-CREATE TABLE Customer_Orders_Bricks (
+CREATE TABLE Customer_Order_Bricks (
 	order_id INT NOT NULL,
 	brick_id INT NOT NULL,
 	quantity INT NOT NULL,
@@ -138,7 +138,7 @@ CREATE TABLE Customer_Orders_Bricks (
     CHECK (quantity > 0)
 );
 
-CREATE TABLE Customer_Orders_Sets (
+CREATE TABLE Customer_Order_Sets (
 	order_id INT NOT NULL,
 	set_id INT NOT NULL,
 	quantity INT NOT NULL,
