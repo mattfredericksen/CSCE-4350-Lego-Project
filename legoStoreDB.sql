@@ -5,6 +5,9 @@ CREATE TABLE Stores (
 	store_id INT NOT NULL AUTO_INCREMENT,
 	address VARCHAR(256) NOT NULL,
 	manager_id INT,
+    active BOOLEAN NOT NULL,
+	  /* because we don't want to lose a
+	     store's history if the store is closed */
     PRIMARY KEY (store_id)
 );
 
@@ -12,6 +15,7 @@ CREATE TABLE Employees (
     employee_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(256) NOT NULL,
     store_id INT NOT NULL,
+    active BOOLEAN NOT NULL,
     PRIMARY KEY (employee_id),
     FOREIGN KEY (store_id) REFERENCES Stores (store_id)
 );
@@ -84,6 +88,9 @@ CREATE TABLE Payments (
 	exp_date DATE NOT NULL,
 	billing_address VARCHAR(256) NOT NULL,
 	active BOOLEAN NOT NULL,
+		/* because this data should be retained in case a customer
+           removes this payment method and then cancels an order,
+           so we can still perform the refund */
 	FOREIGN KEY (customer_id) REFERENCES Customers (customer_id),
 	PRIMARY KEY (customer_id, card_number)
 );
