@@ -1,4 +1,4 @@
-CREATE database LegoCo;
+-- CREATE database LegoCo;
 
 
 CREATE TABLE Stores (
@@ -13,7 +13,7 @@ CREATE TABLE Stores (
 
 CREATE TABLE Employees (
     employee_id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(256) NOT NULL,
+    name VARCHAR(64) NOT NULL,
     store_id INT NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
     PRIMARY KEY (employee_id),
@@ -25,15 +25,15 @@ ADD FOREIGN KEY (manager_id) REFERENCES Employees (employee_id);
 
 CREATE TABLE Bricks (
 	brick_id INT NOT NULL AUTO_INCREMENT,
-	description VARCHAR(256) NOT NULL,
+	description VARCHAR(128) NOT NULL,
     price FLOAT NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
 	PRIMARY KEY (brick_id),
     CHECK (price > 0.0)
 );
 
--- Attempt to prevent Bricks & Sets ID's from overlapping
-ALTER TABLE Bricks AUTO_INCREMENT=1000;
+-- Attempt to prevent Bricks & Sets IDs from overlapping
+ALTER TABLE Bricks AUTO_INCREMENT=10000;
 
 CREATE TABLE Sets (
 	set_id INT NOT NULL AUTO_INCREMENT,
@@ -43,9 +43,9 @@ CREATE TABLE Sets (
 	PRIMARY KEY (set_id)
 );
 
-ALTER TABLE Sets AUTO_INCREMENT=10000;
+ALTER TABLE Sets AUTO_INCREMENT=1000;
 
-CREATE TABLE Set_Bricks (
+CREATE TABLE Sets_Bricks (
 	set_id INT NOT NULL,
 	brick_id INT NOT NULL,
 	quantity INT NOT NULL,
