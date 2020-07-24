@@ -278,5 +278,30 @@ BEGIN
 		INSERT INTO Customer_Orders_Sets
         VALUES (@cart_id, s_id, qty);
 	END IF;
+    SELECT(TRUE);
+END|
+
+CREATE PROCEDURE ModifyCartBricks(c_id INT, b_id INT, qty INT)
+BEGIN
+	SET @cart_id = (SELECT order_id FROM Customer_Orders
+					WHERE customer_id = c_id
+						AND status = 'Cart');
+	IF EXISTS (SELECT * FROM Customer_Orders_Bricks
+			   WHERE order_id = @cart_id
+			       AND brick_id = b_id) THEN
+		IF qty <= 0 THEN
+			DELETE FROM Customer_Orders_Bricks
+            WHERE order_id = @cart_id
+				AND brick_id = b_id;
+		ELSE
+			UPDATE Customer_Orders_Bricks
+            SET quantity = qty
+            WHERE order_id = @cart_id
+				AND brick_id = b_id;
+		END IF;
+	ELSEIF qty > 0 THEN
+		INSERT INTO Customer_Orders_Bricks
+        VALUES (@cart_id, b_id, qty);
+	END IF;
 END|
 DELIMITER ;
