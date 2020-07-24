@@ -51,14 +51,19 @@ def get_store_preference(customer_id=None):
     #                customer_id, single=True)
 
 
-def get_sets(set_id=None):
+def get_sets(set_id=None, description=True):
     if set_id:
-        return execute("SELECT * FROM Sets " 
-                       "WHERE set_id = %s;",
+        return execute("""SELECT * FROM Sets
+                          WHERE set_id = %s;""",
                        set_id, single=True)
+    elif description:
+        return execute("""SELECT set_id, name, description
+                          FROM Sets
+                          WHERE active = TRUE;""")
     else:
-        return execute("SELECT set_id, name FROM Sets "
-                       "WHERE active = TRUE;")
+        return execute("""SELECT set_id, name
+                          FROM Sets
+                          WHERE active = TRUE;""")
 
 
 def get_bricks(brick_id=None):
@@ -87,14 +92,14 @@ def get_set_count(set_id):
                    set_id, single=True)[0]
 
 
-def get_set_inventory(set_id, store_id):
+def get_set_inventory(store_id, set_id):
     result = execute("""SELECT inventory FROM Stores_Sets
                         WHERE store_id = %s AND set_id = %s""",
                      store_id, set_id, single=True)
     return result[0] if result else 0
 
 
-def get_brick_inventory(brick_id, store_id):
+def get_brick_inventory(store_id, brick_id):
     result = execute("""SELECT inventory FROM Stores_Bricks
                         WHERE store_id = %s AND brick_id = %s""",
                      store_id, brick_id, single=True)
@@ -104,3 +109,4 @@ def get_brick_inventory(brick_id, store_id):
 def modify_cart(user_id, item_id, quantity, set_mode):
     execute('ModifyCartSets' if set_mode else 'ModifyCartBricks',
             user_id, item_id, quantity, procedure=True)
+

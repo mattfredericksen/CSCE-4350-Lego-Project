@@ -19,13 +19,13 @@ def details(context: dict, item_id: int, mode: Literal['Set', 'Brick']):
                   f'Description: {item[2]}',
                   f'Price: ${get_set_price(item_id)}',
                   f'Piece count: {get_set_count(item_id)}',
-                  f'Inventory: {get_set_inventory(item_id, store_id)}',
+                  f'Inventory: {get_set_inventory(store_id, item_id)}',
                   sep='\n')
         else:
             item = get_bricks(item_id)
             print(f'Description: {item[1]}',
                   f'Price: ${item[2]}',
-                  f'Inventory: {get_brick_inventory(item_id, store_id)}',
+                  f'Inventory: {get_brick_inventory(store_id, item_id)}',
                   sep='\n')
 
         print('\nSet the item quantity for your cart.\n'
