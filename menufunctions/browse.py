@@ -6,6 +6,7 @@ from .details import details
 from typing import Literal
 
 from test_data.static import bricks, sets
+from .sql import get_sets, get_bricks
 
 
 def browse(context: dict, mode: Literal['Set', 'Brick']):
@@ -16,10 +17,11 @@ def browse(context: dict, mode: Literal['Set', 'Brick']):
 
     instructions = 'Select an item to view more details or '  \
                    'to add it to your cart.'
-    if mode is 'Set':
-        items = [(item_id, item['name']) for item_id, item in sets.items()]
-    else:
-        items = [(item_id, item['description']) for item_id, item in bricks.items()]
+    # if mode is 'Set':
+    #     items = [(item_id, item['name']) for item_id, item in sets.items()]
+    # else:
+    #     items = [(item_id, item['description']) for item_id, item in bricks.items()]
+    items = get_sets() if mode is 'Set' else get_bricks()
 
     browser = SelectionMenuFromTuples(items, title=f'Browse {mode}s',
                                       prologue_text=instructions,
