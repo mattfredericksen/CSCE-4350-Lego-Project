@@ -121,8 +121,8 @@ CREATE TABLE Customer_Orders (
     CHECK (status IN ('Processing', 'Shipping',
                       'Delivered', 'Cancelled',
                       'Returned', 'Cart')),
-    CHECK (order_timestamp IS NOT NULL
-           XOR status = 'Cart'),
+        CHECK (order_timestamp IS NULL
+           XOR status != 'Cart'),
     CHECK (total_price > 0.0)
 );
 
