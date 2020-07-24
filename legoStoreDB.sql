@@ -14,6 +14,8 @@ CREATE TABLE Stores (
 CREATE TABLE Employees (
     employee_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(64) NOT NULL,
+    username VARCHAR(64) NOT NULL,
+    password VARCHAR(64) NOT NULL,
     store_id INT NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
     PRIMARY KEY (employee_id),
@@ -77,10 +79,10 @@ CREATE TABLE Stores_Sets (
 
 CREATE TABLE Customers (
 	customer_id INT NOT NULL AUTO_INCREMENT,
-	email VARCHAR(128) NOT NULL UNIQUE,
-	username VARCHAR(128) NOT NULL UNIQUE,
+	email VARCHAR(64) NOT NULL UNIQUE,
+	username VARCHAR(64) NOT NULL UNIQUE,
 	password VARCHAR(128) NOT NULL,
-	name VARCHAR(128) NOT NULL,
+	name VARCHAR(64) NOT NULL,
 	address VARCHAR(256) NOT NULL,
 	store_preference INT NOT NULL,
     PRIMARY KEY (customer_id),
