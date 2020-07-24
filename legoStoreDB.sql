@@ -147,7 +147,7 @@ FOR EACH ROW
    END|
 DELIMITER ;
 
-CREATE TABLE Customer_Order_Returns (
+CREATE TABLE Customer_Orders_Returns (
 	order_id INT NOT NULL,
 	reason VARCHAR(256),
 	return_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
@@ -155,7 +155,7 @@ CREATE TABLE Customer_Order_Returns (
     PRIMARY KEY (order_id)
 );
 
-CREATE TABLE Customer_Order_Bricks (
+CREATE TABLE Customer_Orders_Bricks (
 	order_id INT NOT NULL,
 	brick_id INT NOT NULL,
 	quantity INT NOT NULL,
@@ -165,7 +165,7 @@ CREATE TABLE Customer_Order_Bricks (
     CHECK (quantity > 0)
 );
 
-CREATE TABLE Customer_Order_Sets (
+CREATE TABLE Customer_Orders_Sets (
 	order_id INT NOT NULL,
 	set_id INT NOT NULL,
 	quantity INT NOT NULL,
@@ -253,3 +253,30 @@ CREATE TABLE Store_Orders_Sets (
 	FOREIGN KEY (set_id) REFERENCES Sets (set_id),
     CHECK (quantity > 0)
 );
+
+-- for modifying cart contents
+DELIMITER |
+CREATE PROCEDURE ModifyCartSets(c_id INT, s_id INT, qty INT)
+BEGIN
+	SET @cart_id = (SELECT order_id FROM Customer_Orders
+					WHERE customer_id = c_id
+						AND status = 'Cart');
+	IF EXISTS (SELECT * FROM Customer_Orders_Sets
+			   WHERE order_id = @cart_id
+			       AND set_id = s_id) THEN
+		IF qty <= 0 THEN
+			DELETE FROM Customer_Orders_Sets
+            WHERE order_id = @cart_id
+				AND set_id = s_id;
+		ELSE
+			UPDATE Customer_Orders_Sets
+            SET quantity = qty
+            WHERE order_id = @cart_id
+				AND set_id = s_id;
+		END IF;
+	ELSEIF qty > 0 THEN
+		INSERT INTO Customer_Orders_Sets
+        VALUES (@cart_id, s_id, qty);
+	END IF;
+END|
+DELIMITER ;
