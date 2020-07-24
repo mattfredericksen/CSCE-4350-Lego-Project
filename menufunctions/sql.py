@@ -88,25 +88,41 @@ def get_set_price(set_id):
 
 def get_set_count(set_id):
     return execute("""SELECT SUM(quantity) FROM Sets_Bricks
-                      WHERE set_id = %s""",
+                      WHERE set_id = %s;""",
                    set_id, single=True)[0]
 
 
 def get_set_inventory(store_id, set_id):
     result = execute("""SELECT inventory FROM Stores_Sets
-                        WHERE store_id = %s AND set_id = %s""",
+                        WHERE store_id = %s AND set_id = %s;""",
                      store_id, set_id, single=True)
     return result[0] if result else 0
 
 
 def get_brick_inventory(store_id, brick_id):
     result = execute("""SELECT inventory FROM Stores_Bricks
-                        WHERE store_id = %s AND brick_id = %s""",
+                        WHERE store_id = %s AND brick_id = %s;""",
                      store_id, brick_id, single=True)
     return result[0] if result else 0
 
 
-def modify_cart(user_id, item_id, quantity, set_mode):
-    execute('ModifyCartSets' if set_mode else 'ModifyCartBricks',
+def modify_cart(user_id, item_id, quantity):
+    execute('ModifyCartSets' if item_id < 10000 else 'ModifyCartBricks',
             user_id, item_id, quantity, procedure=True)
 
+
+def get_cart(user_id):
+    cart_id = execute("""SELECT order_id FROM Customer_Orders
+                         WHERE customer_id = %s AND status = 'Cart';""",
+                      user_id, single=True)[0]
+    return execute("""SELECT Sets.set_id, name, quantity
+                      FROM Customer_Orders_Sets
+                      INNER JOIN Sets
+                      ON Customer_Orders_Sets.set_id = Sets.set_id
+                      WHERE order_id = %s
+                      UNION
+                      SELECT Bricks.brick_id, description, quantity
+                      FROM Customer_Orders_Bricks
+                      INNER JOIN Bricks
+                      ON Customer_Orders_Bricks.brick_id = Bricks.brick_id
+                      WHERE order_id = %s""", cart_id, cart_id)

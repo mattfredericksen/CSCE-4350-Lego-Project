@@ -5,6 +5,7 @@ from .details import details
 from .sale import print_sale
 
 from test_data.static import sets, bricks
+from .sql import get_cart
 
 
 def select_payment(context: dict):
@@ -17,9 +18,9 @@ def checkout(context: dict):
                        prologue_text=instructions,
                        epilogue_text=instructions)
 
-    for i, q in context['cart']['sets'].items():
-        menu.append_item(FunctionItem(f'(Qty: {q}) {sets[i]["name"]}',
-                                      details, [context, i, 'Set'],
+    for idx, description, qty in get_cart(user_id=2):  # TODO: get real user_id
+        menu.append_item(FunctionItem(f'(Qty: {qty}) {description}',
+                                      details, [context, idx],
                                       should_exit=True))
     for i, q in context['cart']['bricks'].items():
         menu.append_item(FunctionItem(f'(Qty: {q}) {bricks[i]["name"]}',
