@@ -1,8 +1,13 @@
 insert into Employees (name, store_id) values ('Frederigo Palister', 2);
+update stores set manager_id = 1 where store_id = 2;
 insert into Employees (name, store_id) values ('Dolly Mutch', 3);
+update stores set manager_id = 2 where store_id = 3;
 insert into Employees (name, store_id) values ('Dasha Delong', 4);
+update stores set manager_id = 3 where store_id = 4;
 insert into Employees (name, store_id) values ('Imojean Brogi', 5);
+update stores set manager_id = 4 where store_id = 5;
 insert into Employees (name, store_id) values ('Gizela Borrett', 1);
+update stores set manager_id = 5 where store_id = 1;
 insert into Employees (name, store_id) values ('Orazio Ladyman', 2);
 insert into Employees (name, store_id) values ('Meg Mulvagh', 3);
 insert into Employees (name, store_id) values ('Karry Tatton', 4);
