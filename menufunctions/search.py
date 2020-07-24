@@ -54,6 +54,6 @@ def search(context: dict):
             # check whether the selection is a set or a brick
             # and display item details
             if (i := browser.selected_item.index) < 10000:
-                details(context, i, 'Set')
+                details(context, i)
             else:
-                details(context, i, 'Brick')
+                details(context, i)

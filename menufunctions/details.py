@@ -5,7 +5,7 @@ from typing import Literal
 from .sql import *
 
 
-def details(context: dict, item_id: int, mode: Literal['Set', 'Brick']):
+def details(context: dict, item_id: int):
     while True:
         user_id = 2  # TODO: fix this after login stuff is complete
         store_id = get_store_preference(user_id)
@@ -13,7 +13,7 @@ def details(context: dict, item_id: int, mode: Literal['Set', 'Brick']):
 
         # display the attributes corresponding to the item type
         print(f'Item ID: {item_id}')
-        if mode is 'Set':
+        if item_id < 10000:
             item = get_sets(item_id)
             print(f'Name: {item[1]}',
                   f'Description: {item[2]}',
@@ -39,7 +39,7 @@ def details(context: dict, item_id: int, mode: Literal['Set', 'Brick']):
         except ValueError:
             pass
         else:
-            modify_cart(user_id, item_id, quantity, set_mode=(mode is 'Set'))
+            modify_cart(user_id, item_id, quantity)
             if quantity > 0:
                 Screen.clear()
                 input('Item quantity has been set in your cart.\n\n'

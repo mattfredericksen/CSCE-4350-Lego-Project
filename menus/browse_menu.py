@@ -11,8 +11,8 @@ def browse_menu(context: dict):
     menu = ConsoleMenu('Browse & Search LEGO Products',
                        exit_option_text='Return to Main Menu')
 
-    for item in (FunctionItem('Browse Bricks', browse, (context, 'Brick')),
-                 FunctionItem('Browse Sets', browse, (context, 'Set')),
+    for item in (FunctionItem('Browse Bricks', browse, (context, False)),
+                 FunctionItem('Browse Sets', browse, (context, True)),
                  FunctionItem('Search All', search, [context])):
         menu.append_item(item)
     menu.show()

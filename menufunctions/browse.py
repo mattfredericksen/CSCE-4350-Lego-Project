@@ -3,13 +3,10 @@
 from menuclasses.selection_menu import SelectionMenuFromTuples
 from .details import details
 
-from typing import Literal
-
-from test_data.static import bricks, sets
 from .sql import get_sets, get_bricks
 
 
-def browse(context: dict, mode: Literal['Set', 'Brick']):
+def browse(context: dict, set_mode: bool):
     """Display a menu with all available Sets or Bricks.
     When the user selects an item, its details are displayed
     with an option to add that item to their cart.
@@ -21,9 +18,9 @@ def browse(context: dict, mode: Literal['Set', 'Brick']):
     #     items = [(item_id, item['name']) for item_id, item in sets.items()]
     # else:
     #     items = [(item_id, item['description']) for item_id, item in bricks.items()]
-    items = get_sets(description=False) if mode is 'Set' else get_bricks()
+    items = get_sets(description=False) if set_mode else get_bricks()
 
-    browser = SelectionMenuFromTuples(items, title=f'Browse {mode}s',
+    browser = SelectionMenuFromTuples(items, title=f'Browse {"Sets" if set_mode else "Bricks"}',
                                       prologue_text=instructions,
                                       epilogue_text=instructions,
                                       exit_option_text='Return')
@@ -38,4 +35,4 @@ def browse(context: dict, mode: Literal['Set', 'Brick']):
 
         if browser.selected_item is browser.exit_item:
             break
-        details(context, browser.selected_item.index, mode)
+        details(context, browser.selected_item.index)
