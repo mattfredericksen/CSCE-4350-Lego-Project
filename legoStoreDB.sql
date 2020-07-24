@@ -88,6 +88,7 @@ CREATE TABLE Customers (
 );
 
 CREATE TABLE Payments (
+    payment_id INT NOT NULL AUTO_INCREMENT,
 	customer_id INT NOT NULL,
 	card_number CHAR(16) NOT NULL,
 	exp_date DATE NOT NULL,
@@ -96,27 +97,30 @@ CREATE TABLE Payments (
 		/* because this data should be retained in case a customer
            removes this payment method and then cancels an order,
            so we can still perform the refund */
+    PRIMARY KEY (payment_id),
 	FOREIGN KEY (customer_id) REFERENCES Customers (customer_id),
-	PRIMARY KEY (customer_id, card_number)
+	UNIQUE (customer_id, card_number)
 );
 
 CREATE TABLE Customer_Orders (
 	order_id INT NOT NULL AUTO_INCREMENT,
 	customer_id INT NOT NULL,
-	card_number CHAR(16) NOT NULL,
+	payment_id INT NOT NULL,
     store_id INT NOT NULL,
 	order_timestamp TIMESTAMP,
 	delivery_timestamp TIMESTAMP,
 	status VARCHAR(16) NOT NULL,
 	total_price FLOAT NOT NULL,
 	PRIMARY KEY (order_id),
-	FOREIGN KEY (customer_id, card_number)
-        REFERENCES Payments (customer_id, card_number),
+	FOREIGN KEY (customer_id) REFERENCES Customers (customer_id),
+	FOREIGN KEY (payment_id) REFERENCES Payments (payment_id),
     CHECK (delivery_timestamp IS NULL OR
            delivery_timestamp > order_timestamp),
     CHECK (status IN ('Processing', 'Shipping',
                       'Delivered', 'Cancelled',
                       'Returned', 'Cart')),
+    CHECK (order_timestamp IS NOT NULL
+           XOR status = 'Cart'),
     CHECK (total_price > 0.0)
 );
 
