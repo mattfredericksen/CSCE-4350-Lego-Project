@@ -107,12 +107,12 @@ CREATE TABLE Payments (
 CREATE TABLE Customer_Orders (
 	order_id INT NOT NULL AUTO_INCREMENT,
 	customer_id INT NOT NULL,
-	payment_id INT NOT NULL,
-    store_id INT NOT NULL,
+	payment_id INT,
+    store_id INT,
 	order_timestamp TIMESTAMP,
 	delivery_timestamp TIMESTAMP,
 	status VARCHAR(16) NOT NULL,
-	total_price FLOAT NOT NULL,
+	total_price FLOAT,
 	PRIMARY KEY (order_id),
 	FOREIGN KEY (customer_id) REFERENCES Customers (customer_id),
 	FOREIGN KEY (payment_id) REFERENCES Payments (payment_id),
@@ -121,10 +121,31 @@ CREATE TABLE Customer_Orders (
     CHECK (status IN ('Processing', 'Shipping',
                       'Delivered', 'Cancelled',
                       'Returned', 'Cart')),
-        CHECK (order_timestamp IS NULL
+	CHECK ((payment_id IS NULL OR
+			store_id IS NULL OR
+			order_timestamp IS NULL OR
+            total_price IS NULL)
            XOR status != 'Cart'),
-    CHECK (total_price > 0.0)
+    CHECK (total_price IS NULL OR
+		   total_price > 0.0)
 );
+
+-- so that customers will always have a cart
+CREATE TRIGGER auto_cart_insert AFTER INSERT ON Customers
+FOR EACH ROW 
+	INSERT INTO customer_orders (customer_id, status)
+    VALUES (NEW.customer_id, 'Cart');
+
+DELIMITER |
+CREATE TRIGGER auto_cart_update AFTER UPDATE ON Customer_Orders
+FOR EACH ROW
+    BEGIN
+	    IF OLD.status = 'Cart' AND NEW.status <> 'Cart' THEN
+			INSERT INTO customer_orders (customer_id, status)
+			VALUES (NEW.customer_id, 'Cart');
+	   END IF;
+   END|
+DELIMITER ;
 
 CREATE TABLE Customer_Order_Returns (
 	order_id INT NOT NULL,
