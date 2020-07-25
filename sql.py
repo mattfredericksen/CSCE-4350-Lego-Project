@@ -54,6 +54,7 @@ class LegoDB:
             return False
         else:
             self.user_id = self.user_id[0]
+            self.user_type = 'Employee' if employee else 'Customer'
             return True
 
     def get_user_store(self, employee=False):
@@ -358,46 +359,60 @@ class LegoDB:
                ON Bricks.brick_id = Most_Returned.brick_id;""")
         return {'sets': sets, 'bricks': bricks}
 
-    
-    #All below need to be checked#
-        def view_stores(self):
-            return self.execute("""SELECT * FROM Stores;""")
-        
-        def create_store(self, address, manager_id):
-            self.execute("""INSERT INTO Stores (address, manager_id) 
-                            VALUES (%s, %s);""", address, manager_id, fetch=false)
-        
-        def disable_store(self, store_id):
-            self.execute("""UPDATE Stores SET active = FALSE WHERE store_id = %s;""", store_id, fetch=false)
-        
-        def view_employees(self):
-            return self.execute("""SELECT * FROM Employees;""")
-        
-        def create_employee(self, name, username, password, store_id):
-            self.execute("""INSERT INTO Employees (name, username, password, store_id) 
-                            VALUES (%s, %s, %s, %s);""", name, username, password, store_id, fetch=false)
-        
-        def disable_employee(self, employee_id):
-            self.execute("""UPDATE Employees SET active = FALSE WHERE employee_id = %s;""", employee_id, fetch=false)
-            
-        def generate_sales_report(self):
-            sales = self.execute("""SELECT COUNT(sale_id) as num_sales, sum(total_price) as earnings, avg(total_price) as average_price
-                                    FROM Store_Sales;""", single=true)
-            employee_sales = self.execute("""SELECT name, Store_Sales.employee_id, COUNT(sale_id) as num_sales
-                                             FROM Store_Sales, Employees 
-                                             WHERE Employees.employee_id = Store_Sales.employee_id 
-                                             group by Store_Sales.employee_id;""")
-            
-            return {'sales' : sales, 'employee_sales' : employee_sales}
-        
-        def store_returns(self):
-            return self.execute("""SELECT COUNT(Store_Sales_Returns.sale_id) as num_returns, SUM(Store_Sales.total_price) as total_price_returned 
-                                   FROM Store_Sales_Returns, Store_Sales 
-                                   WHERE Store_Sales.sale_id = Store_Sales_Returns.sale_id;""")
-        
-        def inventory(self, bricks_threshold, sets_threshold):
-            bricks = self.execute("""SELECT * FROM Stores_Bricks where inventory < %s;""", bricks_threshold)
-            
-            sets = self.execute("""SELECT * FROM Stores_Sets where inventory < %s;""", sets_threshold)
-            
-            return {'sets': sets, 'bricks': bricks}
+    def view_stores(self):
+        return self.execute("""SELECT * FROM Stores;""")
+
+    def create_store(self, address, manager_id):
+        self.execute("""INSERT INTO Stores (address, manager_id) 
+                        VALUES (%s, %s);""",
+                     address, manager_id, fetch=False)
+
+    def disable_store(self, store_id):
+        self.execute("""UPDATE Stores 
+                        SET active = FALSE 
+                        WHERE store_id = %s;""",
+                     store_id, fetch=False)
+
+    def view_employees(self):
+        return self.execute("""SELECT * FROM Employees
+                               WHERE active = TRUE;""")
+
+    def create_employee(self, name, username, password, store_id):
+        self.execute("""INSERT INTO Employees (name, username, password, store_id) 
+                        VALUES (%s, %s, %s, %s);""",
+                     name, username, password, store_id, fetch=False)
+
+    def disable_employee(self, employee_id):
+        self.execute("""UPDATE Employees 
+                        SET active = FALSE 
+                        WHERE employee_id = %s;""",
+                     employee_id, fetch=False)
+
+    def generate_sales_report(self):
+        sales = self.execute(
+                    """SELECT COUNT(sale_id) as num_sales, 
+                              SUM(total_price) as earnings, 
+                              AVG(total_price) as average_price
+                       FROM Store_Sales;""", single=True)
+        employee_sales = self.execute(
+                             """SELECT name, Store_Sales.employee_id, COUNT(sale_id)
+                                FROM Store_Sales, Employees 
+                                WHERE Employees.employee_id = Store_Sales.employee_id 
+                                GROUP BY Store_Sales.employee_id;""")
+
+        return {'sales' : sales, 'employee_sales' : employee_sales}
+
+    def store_returns(self):
+        return self.execute("""SELECT COUNT(Store_Sales_Returns.sale_id) as num_returns, 
+                                      SUM(Store_Sales.total_price) as total_price_returned 
+                               FROM Store_Sales_Returns, Store_Sales 
+                               WHERE Store_Sales.sale_id = Store_Sales_Returns.sale_id;""")
+
+    def inventory(self, bricks_threshold, sets_threshold):
+        bricks = self.execute("""SELECT * FROM Stores_Bricks
+                                 WHERE inventory < %s;""", bricks_threshold)
+
+        sets = self.execute("""SELECT * FROM Stores_Sets
+                               WHERE inventory < %s;""", sets_threshold)
+
+        return {'sets': sets, 'bricks': bricks}
