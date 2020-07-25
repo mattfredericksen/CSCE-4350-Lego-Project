@@ -14,6 +14,9 @@ class LegoDB:
         self.store = None
 
     def execute(self, query, *args, single=False, procedure=False, fetch=True):
+        """This function is used by many others to wrap the process of connecting
+        to the database, executing SQL, committing, and closing the connection.
+        """
         db = connect(**self.credentials)
         cursor = db.cursor()
         if procedure:
@@ -42,7 +45,7 @@ class LegoDB:
                      username, password, name, email, address, store_preference, fetch=False)
 
     def user_login(self, username, password, employee=False) -> bool:
-        attribute, table = ('customer_id', 'Customers')  \
+        attribute, table = ('customer_id', 'Customers') \
             if not employee else ('employee_id', 'Employees')
         self.user_id = self.execute(f"""SELECT {attribute} FROM {table}
                                         WHERE username = %s AND password = %s;""",
@@ -54,7 +57,7 @@ class LegoDB:
             return True
 
     def get_user_store(self, employee=False):
-        attribute, table = ('store_preference', 'Customers')  \
+        attribute, table = ('store_preference', 'Customers') \
             if not employee else ('store', 'Employees')
         return self.execute(f"""SELECT {attribute} FROM {table}
                                 WHERE customer_id = %s""",
@@ -123,7 +126,8 @@ class LegoDB:
         cart_id = self.execute("""SELECT order_id FROM Customer_Orders
                                   WHERE customer_id = %s AND status = 'Cart';""",
                                self.user_id, single=True)[0]
-        return self.execute("""SELECT Sets.set_id, name, quantity, price
+        return self.execute("""
+                  SELECT Sets.set_id, name, quantity, price
                   FROM Customer_Orders_Sets
                   INNER JOIN Sets
                   ON Customer_Orders_Sets.set_id = Sets.set_id
@@ -201,3 +205,27 @@ class LegoDB:
                         SET address = %s
                         WHERE customer_id = %s;""",
                      address, self.user_id, fetch=False)
+
+    def create_sale(self, sale_items: dict, credit_card: str):
+        total_price = sum(item['quantity'] * item['price'] for item in sale_items.values())
+        db = connect(**self.credentials)
+        cursor = db.cursor()
+        cursor.execute(
+            """INSERT INTO Store_Sales (store_id, employee_id, total_price, credit_card)
+               VALUES (%s, %s, %s, %s);""",
+            (self.get_user_store(), self.user_id, total_price, credit_card if credit_card else None))
+
+        sets, bricks = [], []
+        for item_id, item in sale_items.items():
+            (sets if item_id < 10000 else bricks).append(
+                    (cursor.lastrowid, item_id, item['quantity']))
+
+        cursor.executemany(
+            """INSERT INTO Store_Sales_Sets
+               VALUES (%s, %s, %s)""", sets)
+        cursor.executemany(
+            """INSERT INTO Store_Sales_Bricks
+               VALUES (%s, %s, %s)""", bricks)
+        cursor.close()
+        db.commit()
+        db.close()

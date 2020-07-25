@@ -121,7 +121,24 @@ def view(sale_items: dict) -> None:
 
 
 def complete(database: LegoDB, sale_items: dict) -> bool:
-    pass
+    if print_sale(sale_items, 'SALE CONFIRMATION',
+                  'Continue to payment? [y/n]: ')  \
+            not in ('y', 'ye', 'yes'):
+        return False
+    Screen.clear()
+
+    print('CASH OR CREDIT\n\n'
+          'If customer is paying via credit card, type it in.\n'
+          'Otherwise, press [enter] after accepting the cash.\n')
+    card = input('>> ')
+    try:
+        database.create_sale(sale_items, card)
+    except Exception as e:
+        print(f'\n{e}')
+        input('Failed to process sale. Press [enter] to return.')
+    else:
+        input('Transaction completed. Press [enter] to continue.')
+        return True
 
 
 def confirm_exit(sale_items: dict) -> bool:

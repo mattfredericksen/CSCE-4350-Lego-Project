@@ -101,7 +101,8 @@ CREATE TABLE Payments (
            so we can still perform the refund */
     PRIMARY KEY (payment_id),
     FOREIGN KEY (customer_id) REFERENCES Customers (customer_id),
-    UNIQUE (customer_id, card_number)
+    UNIQUE (customer_id, card_number),
+    CHECK (LENGTH(card_number) = 16)
 );
 
 CREATE TABLE Customer_Orders (
@@ -187,7 +188,8 @@ CREATE TABLE Store_Sales (
     PRIMARY KEY (sale_id),
     FOREIGN KEY (store_id) REFERENCES Stores (store_id),
     FOREIGN KEY (employee_id) REFERENCES Employees (employee_id),
-    CHECK (total_price > 0.0)
+    CHECK (total_price > 0.0),
+    CHECK (LENGTH(credit_card) = 16)
 );
 
 CREATE TABLE Store_Sales_Returns (
