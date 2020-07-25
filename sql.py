@@ -190,14 +190,14 @@ class LegoDB:
                         VALUES (%s, %s, %s, %s)""",
                      self.user_id, card, exp_date, address, fetch=False)
 
-    def get_stores(self, store_id=None):
-        if store_id:
-            return self.execute("""SELECT address FROM Stores
-                                   WHERE store_id = %s;""",
-                                store_id, single=True)[0]
-        else:
-            return self.execute("""SELECT store_id, address FROM Stores
-                                   WHERE active = TRUE;""")
+    # def get_stores(self, store_id=None):
+    #     if store_id:
+    #         return self.execute("""SELECT address FROM Stores
+    #                                WHERE store_id = %s;""",
+    #                             store_id, single=True)[0]
+    #     else:
+    #         return self.execute("""SELECT store_id, address FROM Stores
+    #                                WHERE active = TRUE;""")
 
     def set_store_preference(self, store_id: int):
         self.execute("""UPDATE Customers
@@ -378,7 +378,7 @@ class LegoDB:
     def create_store(self, address, manager_id):
         self.execute("""INSERT INTO Stores (address, manager_id) 
                         VALUES (%s, %s);""",
-                     address, manager_id, fetch=False)
+                     address, manager_id if manager_id else None, fetch=False)
 
     def disable_store(self, store_id):
         self.execute("""UPDATE Stores 
@@ -386,10 +386,16 @@ class LegoDB:
                         WHERE store_id = %s;""",
                      store_id, fetch=False)
 
-    def get_employees(self):
-        return self.execute("""SELECT employee_id, name, store_id 
-                               FROM Employees
-                               WHERE active = TRUE;""")
+    def get_employees(self, employee_id=None):
+        if employee_id:
+            return self.execute("""SELECT name, store_id 
+                                   FROM Employees
+                                   WHERE employee_id = %s;""",
+                                employee_id, single=True)
+        else:
+            return self.execute("""SELECT employee_id, name, store_id 
+                                   FROM Employees
+                                   WHERE active = TRUE;""")
 
     def create_employee(self, name, username, password, store_id):
         self.execute("""INSERT INTO Employees (name, username, password, store_id) 
