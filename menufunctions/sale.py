@@ -3,8 +3,10 @@
 from consolemenu.screen import Screen
 from menuclasses.selection_menu import SelectionMenuFromTuples
 
+from sql import LegoDB
 
-def add(context: dict, sale_items: dict) -> None:
+
+def add(database: LegoDB, sale_items: dict) -> None:
     """Add an item to the current sale"""
 
     # exit loop when user enters nothing
@@ -19,7 +21,8 @@ def add(context: dict, sale_items: dict) -> None:
         # check validity of product_id
         # assume original schema designation of set/bricks IDs applies
         try:
-            item = get_sets(item_id) if item_id < 10000 else get_bricks(item_id)
+            item = database.get_sets(item_id)  \
+                if item_id < 10000 else database.get_bricks(item_id)
         except ValueError:
             Screen.clear()
             print(f'"{item_id}" is not a valid Item ID.\n')
@@ -44,14 +47,15 @@ def add(context: dict, sale_items: dict) -> None:
         else:
             sale_items[item_id] = {
                 'name': item[1],
-                'price': get_set_price(item_id) if item_id < 10000 else item[2],
+                'price': database.get_set_price(item_id)
+                             if item_id < 10000 else item[2],
                 'quantity': quantity
             }
         Screen.clear()
         print(f'Added {quantity} "{item[1]}" to the sale.\n')
 
 
-def remove(context: dict, sale_items: dict) -> None:
+def remove(sale_items: dict) -> None:
     """Remove an item from the current sale"""
 
     # combine sets and bricks into a single list for displaying
@@ -111,16 +115,16 @@ def print_sale(sale_items: dict, title: str, prompt: str) -> str:
     return input(prompt).lower()
 
 
-def view(context: dict, sale_items: dict) -> None:
+def view(sale_items: dict) -> None:
     """Print the sale. No modification."""
     print_sale(sale_items, 'SALE IN PROGRESS', 'Press [enter] to return to the sale.')
 
 
-def complete(context: dict, sale_items: dict) -> bool:
+def complete(database: LegoDB, sale_items: dict) -> bool:
     pass
 
 
-def confirm_exit(context: dict, sale_items: dict) -> bool:
+def confirm_exit(sale_items: dict) -> bool:
     """Confirm exiting of sale when items have been entered.
     Returns True if exit should occur, False otherwise
     """

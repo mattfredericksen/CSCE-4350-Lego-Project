@@ -41,9 +41,11 @@ class LegoDB:
                         VALUES (%s, %s, %s, %s, %s, %s);""",
                      username, password, name, email, address, store_preference, fetch=False)
 
-    def customer_login(self, username, password) -> bool:
-        self.user_id = self.execute("""SELECT customer_id FROM customers
-                                       WHERE username = %s AND password = %s;""",
+    def user_login(self, username, password, employee=False) -> bool:
+        attribute, table = ('customer_id', 'Customers')  \
+            if not employee else ('employee_id', 'Employees')
+        self.user_id = self.execute(f"""SELECT {attribute} FROM {table}
+                                        WHERE username = %s AND password = %s;""",
                                     username, password, single=True)
         if not self.user_id:
             return False
@@ -51,9 +53,12 @@ class LegoDB:
             self.user_id = self.user_id[0]
             return True
 
-    def get_store_preference(self):
-        return self.execute("""SELECT store_preference FROM Customers
-                               WHERE customer_id = %s""", self.user_id, single=True)[0]
+    def get_user_store(self, employee=False):
+        attribute, table = ('store_preference', 'Customers')  \
+            if not employee else ('store', 'Employees')
+        return self.execute(f"""SELECT {attribute} FROM {table}
+                                WHERE customer_id = %s""",
+                            self.user_id, single=True)[0]
 
     def get_sets(self, set_id=None, description=True):
         if set_id:
@@ -99,13 +104,13 @@ class LegoDB:
     def get_set_inventory(self, set_id):
         result = self.execute("""SELECT inventory FROM Stores_Sets
                                  WHERE store_id = %s AND set_id = %s;""",
-                              self.get_store_preference(), set_id, single=True)
+                              self.get_user_store(), set_id, single=True)
         return result[0] if result else 0
 
     def get_brick_inventory(self, brick_id):
         result = self.execute("""SELECT inventory FROM Stores_Bricks
                                  WHERE store_id = %s AND brick_id = %s;""",
-                              self.get_store_preference(), brick_id,
+                              self.get_user_store(), brick_id,
                               single=True)
         return result[0] if result else 0
 
@@ -147,7 +152,7 @@ class LegoDB:
         total = sum(quantity * price for *_, quantity, price
                     in self.get_cart())
         self.execute('CartToOrder', self.user_id, payment_id,
-                     self.get_store_preference(), total, procedure=True)
+                     self.get_user_store(), total, procedure=True)
 
     def get_customer_orders(self, order_id=None):
         if order_id:

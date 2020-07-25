@@ -9,19 +9,15 @@ from menus.customer_account_menu import change_store_preference
 from sql import LegoDB
 
 
-def login(store_mode: bool, database: LegoDB):
+def login(database: LegoDB, store_mode: bool):
     username = input('Username: ')
 
     # getpass doesn't show characters as user types
     password = getpass('Password: ')
 
-    if store_mode:
-        # use employee table for checking username & password
-        pass
-    else:
-        if not database.customer_login(username, password):
-            input('Incorrect username or password. Press [enter] to return.')
-            return
+    if not database.user_login(username, password, employee=store_mode):
+        input('Incorrect username or password. Press [enter] to return.')
+        return
 
     # TODO: log into SQL server
 
@@ -56,6 +52,6 @@ def create_account(database: LegoDB):
         print(f'\n{e}')
         input('Failed to create new account. Press [enter] to return.')
     else:
-        database.customer_login(username, password)
+        database.user_login(username, password)
         change_store_preference(database)
         main_menu(database)

@@ -34,7 +34,7 @@ def add_payment_option(database: LegoDB):
 
 def change_store_preference(database: LegoDB):
     menu = ConsoleMenu('Select Preferred Store',
-                       f'Current store: {database.get_stores(database.get_store_preference())}',
+                       f'Current store: {database.get_stores(database.get_user_store())}',
                        exit_option_text='Return')
     for store_id, address in database.get_stores():
         menu.append_item(

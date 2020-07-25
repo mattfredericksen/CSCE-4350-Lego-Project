@@ -9,18 +9,20 @@ from .store_menu import store_menu
 from .employee_menu import employee_menu
 from .report_menu import report_menu
 
+from sql import LegoDB
 
-def employee_main_menu(context: dict):
+
+def employee_main_menu(database: LegoDB):
     # TODO: perhaps add a way for employees to clock in/out
-    menu = ConsoleMenu('Welcome, working-class scum',
+    menu = ConsoleMenu('Welcome, Employee',
                        exit_option_text='Log Out')
 
-    for item in (FunctionItem('Start a Sale', sale_menu, [context]),
-                 NotImplementedItem('Start a Return'),
-                 NotImplementedItem('Inventory Management'),  # order/delivery
-                 FunctionItem('Employee Management', employee_menu, [context]),
-                 FunctionItem('Store Management', store_menu, [context]),
-                 FunctionItem('Reports', report_menu, [context])):
+    for item in (FunctionItem('Start a Sale', sale_menu, [database]),
+                 NotImplementedItem('NYI: Start a Return'),
+                 NotImplementedItem('NYI: Inventory Management'),  # order/delivery
+                 FunctionItem('Employee Management', employee_menu, [database]),
+                 FunctionItem('Store Management', store_menu, [database]),
+                 FunctionItem('Reports', report_menu, [database])):
         menu.append_item(item)
     menu.show()
 
