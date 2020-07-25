@@ -137,19 +137,6 @@ FOR EACH ROW
     INSERT INTO customer_orders (customer_id, status)
     VALUES (NEW.customer_id, 'Cart');
 
-/* swapped out with a CartToOrder since triggers
-   can't modify the same table they were triggered by
-DELIMITER |
-CREATE TRIGGER auto_cart_update AFTER UPDATE ON Customer_Orders
-FOR EACH ROW
-    BEGIN
-        IF OLD.status = 'Cart' AND NEW.status <> 'Cart' THEN
-            INSERT INTO customer_orders (customer_id, status)
-            VALUES (NEW.customer_id, 'Cart');
-       END IF;
-   END|
-DELIMITER ;  */
-
 CREATE TABLE Customer_Orders_Returns (
     order_id INT NOT NULL,
     reason VARCHAR(256),
