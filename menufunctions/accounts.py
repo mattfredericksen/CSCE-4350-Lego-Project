@@ -15,16 +15,15 @@ def login(database: LegoDB, store_mode: bool):
     # getpass doesn't show characters as user types
     password = getpass('Password: ')
 
-    if not database.user_login(username, password, employee=store_mode):
+    if store_mode:
+        if not database.employee_login(username, password):
+            input('Incorrect username or password. Press [enter] to return.')
+            return
+    elif not database.customer_login(username, password):
         input('Incorrect username or password. Press [enter] to return.')
         return
 
-    # TODO: log into SQL server
-
-    # Assuming success:
     if store_mode:
-        # temporary:
-        database.store = 1
         employee_main_menu(database)
     else:
         main_menu(database)
@@ -52,6 +51,6 @@ def create_account(database: LegoDB):
         print(f'\n{e}')
         input('Failed to create new account. Press [enter] to return.')
     else:
-        database.user_login(username, password)
+        database.customer_login(username, password)
         change_store_preference(database)
         main_menu(database)

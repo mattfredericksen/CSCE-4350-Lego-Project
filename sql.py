@@ -44,18 +44,25 @@ class LegoDB:
                         VALUES (%s, %s, %s, %s, %s, %s);""",
                      username, password, name, email, address, store_preference, fetch=False)
 
-    def user_login(self, username, password, employee=False) -> bool:
-        attribute, table = ('customer_id', 'Customers') \
-            if not employee else ('employee_id', 'Employees')
-        self.user_id = self.execute(f"""SELECT {attribute} FROM {table}
-                                        WHERE username = %s AND password = %s;""",
-                                    username, password, single=True)
-        if not self.user_id:
+    def customer_login(self, username, password) -> bool:
+        user_id = self.execute("""SELECT customer_id FROM Customers
+                                  WHERE username = %s AND password = %s;""",
+                               username, password, single=True)
+        if not user_id:
             return False
         else:
-            self.user_id = self.user_id[0]
-            self.user_type = 'Employee' if employee else 'Customer'
+            self.user_id = user_id[0]
             return True
+
+    def employee_login(self, username, password) -> bool:
+        user_id = self.execute("""SELECT employee_id, active FROM Employees
+                                  WHERE username = %s AND password = %s;""",
+                               username, password, single=True)
+        if user_id and user_id[1]:
+            self.user_id = user_id[0]
+            return True
+        else:
+            return False
 
     def get_user_store(self, employee=False):
         attribute, table = ('store_preference', 'Customers') \
@@ -359,8 +366,14 @@ class LegoDB:
                ON Bricks.brick_id = Most_Returned.brick_id;""")
         return {'sets': sets, 'bricks': bricks}
 
-    def view_stores(self):
-        return self.execute("""SELECT * FROM Stores;""")
+    def get_stores(self, store_id=None):
+        if store_id:
+            return self.execute("""SELECT * FROM Stores
+                                   WHERE store_id = %s;""",
+                                store_id, single=True)
+        else:
+            return self.execute("""SELECT * FROM Stores
+                                   WHERE active = TRUE;""")
 
     def create_store(self, address, manager_id):
         self.execute("""INSERT INTO Stores (address, manager_id) 
@@ -373,8 +386,9 @@ class LegoDB:
                         WHERE store_id = %s;""",
                      store_id, fetch=False)
 
-    def view_employees(self):
-        return self.execute("""SELECT * FROM Employees
+    def get_employees(self):
+        return self.execute("""SELECT employee_id, name, store_id 
+                               FROM Employees
                                WHERE active = TRUE;""")
 
     def create_employee(self, name, username, password, store_id):
