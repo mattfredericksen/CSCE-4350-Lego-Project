@@ -10,13 +10,11 @@ def sale_menu(context: dict):
     """Display main sale menu"""
 
     # sale context is maintained across menu functions
-    sale_items = {'sets': {}, 'bricks': {}}
+    sale_items = {}
 
     menu = ConsoleMenu('Sale In Progress', show_exit_option=False)
-    for item in (FunctionItem('Add sets to sale', add,
-                              (context, sale_items['sets'], 'Set')),
-                 FunctionItem('Add bricks to sale', add,
-                              (context, sale_items['bricks'], 'Brick')),
+    for item in (FunctionItem('Add items to sale', add,
+                              (context, sale_items)),
                  FunctionItem('Remove items from sale', remove,
                               (context, sale_items)),
                  FunctionItem('View current sale items', view,
