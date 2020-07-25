@@ -136,6 +136,8 @@ FOR EACH ROW
     INSERT INTO customer_orders (customer_id, status)
     VALUES (NEW.customer_id, 'Cart');
 
+/* swapped out with a CartToOrder since triggers
+   can't modify the same table they were triggered by
 DELIMITER |
 CREATE TRIGGER auto_cart_update AFTER UPDATE ON Customer_Orders
 FOR EACH ROW
@@ -145,7 +147,7 @@ FOR EACH ROW
             VALUES (NEW.customer_id, 'Cart');
        END IF;
    END|
-DELIMITER ;
+DELIMITER ;  */
 
 CREATE TABLE Customer_Orders_Returns (
     order_id INT NOT NULL,
@@ -303,5 +305,19 @@ BEGIN
         INSERT INTO Customer_Orders_Bricks
         VALUES (@cart_id, b_id, qty);
     END IF;
+END|
+
+CREATE PROCEDURE CartToOrder(c_id INT, p_id INT, s_id INT, total FLOAT)
+BEGIN
+    UPDATE customer_orders
+    SET payment_id = p_id, 
+        store_id = s_id, 
+        total_price = total,
+        order_timestamp = CURRENT_TIMESTAMP(), 
+        status = 'Processing'
+    WHERE customer_id = c_id
+        AND status = 'Cart';
+    INSERT INTO customer_orders (customer_id, status)
+    VALUES (c_id, 'Cart');
 END|
 DELIMITER ;
