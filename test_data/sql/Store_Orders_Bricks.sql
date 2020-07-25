@@ -1,22 +1,24 @@
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (7, 10018, 315);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (6, 10010, 95);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (8, 10089, 291);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (9, 10030, 214);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (6, 10005, 454);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (10, 10073, 92);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (7, 10002, 143);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (6, 10089, 426);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (8, 10081, 302);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (10, 10074, 458);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (7, 10006, 495);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (6, 10001, 417);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (6, 10090, 17);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (6, 10041, 318);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (7, 10056, 320);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (9, 10098, 335);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (9, 10036, 253);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (8, 10091, 489);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (7, 10070, 225);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (6, 10023, 53);
-insert into Store_Orders_Bricks (order_id, brick_id, quantity) values (9, 10097, 279);
+insert into Store_Orders_Bricks (order_id, brick_id, quantity) 
+values
+    (1, 10018, 315),
+    (2, 10010, 95),
+    (3, 10089, 291),
+    (4, 10030, 214),
+    (5, 10005, 454),
+    (5, 10073, 92),
+    (4, 10002, 143),
+    (1, 10089, 426),
+    (2, 10081, 302),
+    (3, 10074, 458),
+    (1, 10006, 495),
+    (4, 10001, 417),
+    (2, 10090, 17),
+    (5, 10041, 318),
+    (3, 10056, 320),
+    (1, 10098, 335),
+    (1, 10036, 253),
+    (3, 10091, 489),
+    (2, 10070, 225),
+    (5, 10023, 53),
+    (4, 10097, 279);
 

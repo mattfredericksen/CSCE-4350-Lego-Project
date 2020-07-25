@@ -1,50 +1,50 @@
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (126, 1004, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (123, 1001, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (121, 1020, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (129, 1011, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (123, 1018, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (122, 1013, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (124, 1020, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (123, 1010, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (123, 1017, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (122, 1004, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (126, 1010, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (121, 1010, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (126, 1009, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (127, 1009, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (130, 1011, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (122, 1008, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (127, 1005, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (127, 1010, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (126, 1014, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (123, 1007, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (123, 1000, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (123, 1002, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (127, 1023, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (125, 1014, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (127, 1000, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (128, 1020, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (121, 1023, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (125, 1017, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (124, 1013, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (127, 1021, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (121, 1002, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (125, 1011, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (126, 1022, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (126, 1011, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (122, 1005, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (126, 1016, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (120, 1011, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (122, 1002, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (124, 1001, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (122, 1003, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (125, 1013, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (126, 1003, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (125, 1024, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (123, 1005, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (127, 1022, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (126, 1012, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (124, 1015, 1);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (125, 1000, 3);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (120, 1004, 2);
-insert into Customer_Orders_Sets (order_id, set_id, quantity) values (127, 1001, 3);
+insert into Customer_Orders_Sets (order_id, set_id, quantity) 
+values 
+    (116, 1004, 3),
+    (113, 1001, 2),
+    (101, 1020, 1),
+    (109, 1011, 1),
+    (113, 1018, 2),
+    (102, 1013, 1),
+    (104, 1020, 3),
+    (103, 1010, 2),
+    (113, 1017, 2),
+    (102, 1004, 1),
+    (106, 1010, 1),
+    (101, 1010, 3),
+    (116, 1009, 1),
+    (107, 1009, 2),
+    (110, 1011, 1),
+    (102, 1008, 1),
+    (107, 1005, 3),
+    (117, 1010, 3),
+    (106, 1014, 3),
+    (103, 1007, 3),
+    (103, 1000, 3),
+    (113, 1002, 1),
+    (107, 1023, 1),
+    (105, 1014, 1),
+    (117, 1000, 3),
+    (108, 1020, 3),
+    (101, 1023, 2),
+    (105, 1017, 1),
+    (104, 1013, 3),
+    (107, 1021, 2),
+    (111, 1002, 3),
+    (105, 1011, 1),
+    (106, 1022, 1),
+    (106, 1011, 3),
+    (112, 1005, 1),
+    (116, 1016, 3),
+    (102, 1002, 3),
+    (104, 1001, 3),
+    (102, 1003, 2),
+    (115, 1013, 2),
+    (106, 1003, 3),
+    (105, 1024, 2),
+    (113, 1005, 3),
+    (107, 1022, 3),
+    (106, 1012, 3),
+    (104, 1015, 1),
+    (105, 1000, 3),
+    (107, 1001, 3);

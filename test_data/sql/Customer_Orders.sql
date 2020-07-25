@@ -1,20 +1,19 @@
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (54, 54, 5, '2019-08-17 04:05:13', '2020-09-07 07:33:40', 'Cancelled', 105.92);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (68, 68, 2, '2019-11-13 14:36:52', '2021-07-22 01:20:46', 'Processing', 194.99);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (100, 100, 3, '2019-08-31 10:54:19', '2021-03-23 23:58:07', 'Cancelled', 141.79);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (56, 56, 1, '2020-07-03 09:06:20', '2021-02-26 02:49:46', 'Delivered', 81.83);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (29, 29, 2, '2020-05-21 19:56:04', '2021-06-07 10:41:48', 'Processing', 140.68);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (52, 52, 5, '2020-06-28 02:06:22', null, 'Cart', 243.52);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (57, 57, 3, '2020-02-20 04:26:04', '2020-11-22 06:22:15', 'Shipping', 60.73);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (75, 75, 4, '2019-10-22 08:14:33', '2020-10-22 22:37:42', 'Returned', 297.54);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (43, 43, 2, '2020-07-17 21:28:10', null, 'Cancelled', 241.64);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (56, 56, 3, '2020-01-05 11:27:37', '2021-06-05 12:59:54', 'Processing', 114.01);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (97, 97, 4, '2019-09-22 21:55:12', '2020-12-02 00:59:11', 'Cancelled', 280.6);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (50, 50, 1, '2020-02-13 07:54:46', '2021-05-04 21:47:11', 'Processing', 123.08);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (78, 78, 2, '2019-09-08 20:01:55', '2020-12-17 06:48:05', 'Delivered', 288.6);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (13, 13, 3, '2020-05-21 04:31:06', null, 'Cart', 191.54);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (74, 74, 5, '2019-08-14 01:31:35', '2021-04-14 09:11:44', 'Returned', 93.1);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (12, 12, 5, '2020-02-17 14:31:59', null, 'Shipping', 274.0);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (45, 45, 4, '2020-05-09 19:31:25', '2021-02-21 23:16:06', 'Delivered', 165.49);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (45, 45, 2, '2020-01-15 14:34:31', '2021-03-19 02:27:13', 'Shipping', 235.51);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (80, 80, 2, '2019-09-17 15:16:20', '2021-06-17 20:59:22', 'Cart', 33.58);
-insert into Customer_Orders (customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price) values (82, 82, 4, '2020-06-23 09:06:05', '2021-06-06 15:51:46', 'Processing', 121.45);
+insert into Customer_Orders (order_id, customer_id, payment_id, store_id, order_timestamp, delivery_timestamp, status, total_price)
+values
+    (101, 54, 54, 5, '2019-08-17 04:05:13', '2020-09-07 07:33:40', 'Cancelled', 105.92),
+    (102, 68, 68, 2, '2019-11-13 14:36:52', '2021-07-22 01:20:46', 'Processing', 194.99),
+    (103, 100, 100, 3, '2019-08-31 10:54:19', '2021-03-23 23:58:07', 'Cancelled', 141.79),
+    (104, 56, 56, 1, '2020-07-03 09:06:20', '2021-02-26 02:49:46', 'Delivered', 81.83),
+    (105, 29, 29, 2, '2020-05-21 19:56:04', '2021-06-07 10:41:48', 'Processing', 140.68),
+    (106, 57, 57, 3, '2020-02-20 04:26:04', '2020-11-22 06:22:15', 'Shipping', 60.73),
+    (107, 75, 75, 4, '2019-10-22 08:14:33', '2020-10-22 22:37:42', 'Returned', 297.54),
+    (108, 43, 43, 2, '2020-07-17 21:28:10', null, 'Cancelled', 241.64),
+    (109, 56, 56, 3, '2020-01-05 11:27:37', '2021-06-05 12:59:54', 'Processing', 114.01),
+    (110, 97, 97, 4, '2019-09-22 21:55:12', '2020-12-02 00:59:11', 'Cancelled', 280.6),
+    (111, 50, 50, 1, '2020-02-13 07:54:46', '2021-05-04 21:47:11', 'Processing', 123.08),
+    (112, 78, 78, 2, '2019-09-08 20:01:55', '2020-12-17 06:48:05', 'Delivered', 288.6),
+    (113, 74, 74, 5, '2019-08-14 01:31:35', '2021-04-14 09:11:44', 'Returned', 93.1),
+    (114, 12, 12, 5, '2020-02-17 14:31:59', null, 'Shipping', 274.0),
+    (115, 45, 45, 4, '2020-05-09 19:31:25', '2021-02-21 23:16:06', 'Delivered', 165.49),
+    (116, 45, 45, 2, '2020-01-15 14:34:31', '2021-03-19 02:27:13', 'Shipping', 235.51),
+    (117, 82, 82, 4, '2020-06-23 09:06:05', '2021-06-06 15:51:46', 'Processing', 121.45);

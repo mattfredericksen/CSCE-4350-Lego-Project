@@ -1,50 +1,52 @@
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (10, 10088, 14);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (14, 10054, 46);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (19, 10089, 28);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (11, 10080, 36);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (6, 10064, 40);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (6, 10019, 36);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (11, 10056, 21);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (19, 10011, 43);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (3, 10096, 39);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (9, 10081, 26);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (14, 10072, 36);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (13, 10003, 9);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (1, 10010, 3);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (8, 10030, 5);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (12, 10040, 44);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (17, 10035, 10);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (5, 10015, 31);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (8, 10087, 23);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (19, 10034, 29);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (9, 10064, 12);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (13, 10087, 18);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (17, 10045, 30);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (5, 10042, 42);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (20, 10037, 27);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (20, 10012, 21);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (8, 10050, 32);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (2, 10097, 14);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (5, 10017, 7);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (19, 10059, 32);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (10, 10023, 35);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (19, 10073, 16);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (13, 10031, 8);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (16, 10021, 25);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (4, 10080, 41);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (9, 10052, 34);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (12, 10073, 50);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (10, 10046, 27);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (19, 10083, 48);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (16, 10069, 40);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (19, 10027, 25);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (10, 10017, 37);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (10, 10029, 25);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (16, 10058, 47);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (11, 10021, 16);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (7, 10003, 20);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (2, 10050, 31);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (8, 10070, 46);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (5, 10027, 18);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (1, 10038, 4);
-insert into Store_Sales_Bricks (sale_id, brick_id, quantity) values (8, 10089, 23);
+insert into Store_Sales_Bricks (sale_id, brick_id, quantity) 
+values 
+    (10, 10088, 14),
+    (14, 10054, 46),
+    (19, 10089, 28),
+    (11, 10080, 36),
+    (6, 10064, 40),
+    (6, 10019, 36),
+    (11, 10056, 21),
+    (19, 10011, 43),
+    (3, 10096, 39),
+    (9, 10081, 26),
+    (14, 10072, 36),
+    (13, 10003, 9),
+    (1, 10010, 3),
+    (8, 10030, 5),
+    (12, 10040, 44),
+    (17, 10035, 10),
+    (5, 10015, 31),
+    (8, 10087, 23),
+    (19, 10034, 29),
+    (9, 10064, 12),
+    (13, 10087, 18),
+    (17, 10045, 30),
+    (5, 10042, 42),
+    (20, 10037, 27),
+    (20, 10012, 21),
+    (8, 10050, 32),
+    (2, 10097, 14),
+    (5, 10017, 7),
+    (19, 10059, 32),
+    (10, 10023, 35),
+    (19, 10073, 16),
+    (13, 10031, 8),
+    (16, 10021, 25),
+    (4, 10080, 41),
+    (9, 10052, 34),
+    (12, 10073, 50),
+    (10, 10046, 27),
+    (19, 10083, 48),
+    (16, 10069, 40),
+    (19, 10027, 25),
+    (10, 10017, 37),
+    (10, 10029, 25),
+    (16, 10058, 47),
+    (11, 10021, 16),
+    (7, 10003, 20),
+    (2, 10050, 31),
+    (8, 10070, 46),
+    (5, 10027, 18),
+    (1, 10038, 4),
+    (8, 10089, 23);

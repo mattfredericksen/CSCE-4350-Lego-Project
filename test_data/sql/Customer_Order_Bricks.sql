@@ -1,61 +1,63 @@
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (117, 10084, 1);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10042, 18);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (112, 10089, 5);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10019, 15);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (115, 10074, 8);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (118, 10006, 1);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (118, 10003, 18);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (115, 10003, 5);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (118, 10046, 8);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10037, 6);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10024, 17);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (120, 10001, 9);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (112, 10012, 14);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (115, 10024, 16);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (119, 10083, 7);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (114, 10025, 13);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (117, 10088, 12);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (116, 10021, 4);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (118, 10029, 6);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10060, 12);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (119, 10031, 3);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (117, 10032, 11);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (120, 10008, 10);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (119, 10048, 16);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (118, 10065, 9);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10065, 8);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (115, 10063, 11);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (112, 10060, 9);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (119, 10028, 2);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (114, 10054, 9);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (116, 10049, 7);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (112, 10031, 8);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10020, 13);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (112, 10037, 12);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (113, 10024, 13);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (112, 10097, 11);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (116, 10066, 6);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (114, 10052, 10);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (115, 10005, 8);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (113, 10021, 10);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (119, 10095, 8);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10068, 5);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (117, 10045, 9);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (116, 10048, 6);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (116, 10077, 3);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (119, 10088, 2);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (118, 10044, 10);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (117, 10013, 19);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10064, 19);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10089, 10);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (116, 10032, 20);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (114, 10073, 2);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10059, 8);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (120, 10087, 1);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (122, 10037, 10);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (119, 10043, 8);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (114, 10079, 18);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (115, 10076, 18);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (117, 10060, 17);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10017, 15);
-insert into Customer_Orders_Bricks (order_id, brick_id, quantity) values (111, 10039, 19);
+insert into Customer_Orders_Bricks (order_id, brick_id, quantity) 
+values
+    (117, 10084, 1),
+    (111, 10042, 18),
+    (112, 10089, 5),
+    (111, 10019, 15),
+    (115, 10074, 8),
+    (117, 10006, 1),
+    (116, 10003, 18),
+    (115, 10003, 5),
+    (115, 10046, 8),
+    (111, 10037, 6),
+    (111, 10024, 17),
+    (110, 10001, 9),
+    (112, 10012, 14),
+    (115, 10024, 16),
+    (110, 10083, 7),
+    (114, 10025, 13),
+    (117, 10088, 12),
+    (116, 10021, 4),
+    (114, 10029, 6),
+    (111, 10060, 12),
+    (111, 10031, 3),
+    (117, 10032, 11),
+    (110, 10008, 10),
+    (112, 10048, 16),
+    (113, 10065, 9),
+    (111, 10065, 8),
+    (115, 10063, 11),
+    (112, 10060, 9),
+    (113, 10028, 2),
+    (114, 10054, 9),
+    (116, 10049, 7),
+    (112, 10031, 8),
+    (111, 10020, 13),
+    (112, 10037, 12),
+    (113, 10024, 13),
+    (112, 10097, 11),
+    (116, 10066, 6),
+    (114, 10052, 10),
+    (115, 10005, 8),
+    (113, 10021, 10),
+    (114, 10095, 8),
+    (111, 10068, 5),
+    (117, 10045, 9),
+    (116, 10048, 6),
+    (116, 10077, 3),
+    (115, 10088, 2),
+    (112, 10044, 10),
+    (117, 10013, 19),
+    (111, 10064, 19),
+    (111, 10089, 10),
+    (116, 10032, 20),
+    (114, 10073, 2),
+    (111, 10059, 8),
+    (103, 10087, 1),
+    (102, 10037, 10),
+    (116, 10043, 8),
+    (114, 10079, 18),
+    (115, 10076, 18),
+    (117, 10060, 17),
+    (111, 10017, 15),
+    (111, 10039, 19);

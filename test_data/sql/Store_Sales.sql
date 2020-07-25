@@ -1,20 +1,22 @@
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (3, 10, '2020-04-17 00:48:41', 287.11, '946619060106091');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (5, 10, '2020-06-27 17:35:49', 229.89, '210152052942423');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (4, 48, '2020-06-07 03:02:27', 280.23, '210720804339479');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (2, 48, '2019-09-30 15:40:40', 184.73, '002465036563269');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (3, 18, '2019-08-09 01:25:10', 14.1, '096246099746457');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (3, 15, '2020-02-06 02:27:57', 250.68, '917006297002953');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (3, 45, '2020-01-31 13:48:54', 165.34, '984359932571545');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (4, 45, '2020-01-15 18:48:30', 207.72, '998466698308813');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (5, 46, '2020-01-19 13:28:44', 285.43, null);
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (2, 24, '2019-12-03 10:49:39', 170.95, '966226066523747');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (4, 22, '2019-08-26 22:53:43', 287.96, '991338078450983');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (4, 6, '2019-11-02 21:40:51', 221.32, '851430750973913');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (2, 44, '2020-04-07 01:47:06', 195.69, null);
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (1, 19, '2020-01-18 04:56:25', 193.79, '047361503743656');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (2, 41, '2019-08-23 03:44:31', 35.18, '476074514251026');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (2, 32, '2020-05-15 03:14:05', 118.96, '978939103940324');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (2, 38, '2020-03-24 00:18:20', 92.86, '068715180065251');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (5, 17, '2020-04-24 15:36:39', 17.15, '821139307942523');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (3, 22, '2019-10-25 00:14:32', 0.82, '791956163409150');
-insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) values (5, 33, '2020-02-10 11:46:14', 42.78, '444824042826603');
+insert into Store_Sales (store_id, employee_id, sale_timestamp, total_price, credit_card) 
+values
+     (3, 10, '2020-04-17 00:48:41', 287.11, '9466190601060911'),
+     (5, 10, '2020-06-27 17:35:49', 229.89, '2101520529424231'),
+     (4, 48, '2020-06-07 03:02:27', 280.23, '2107208043394791'),
+     (2, 48, '2019-09-30 15:40:40', 184.73, '0024650365632691'),
+     (3, 18, '2019-08-09 01:25:10', 14.1, '0962460997464571'),
+     (3, 15, '2020-02-06 02:27:57', 250.68, '9170062970029513'),
+     (3, 45, '2020-01-31 13:48:54', 165.34, '9843599325715415'),
+     (4, 45, '2020-01-15 18:48:30', 207.72, '9984666983088113'),
+     (5, 46, '2020-01-19 13:28:44', 285.43, null),
+     (2, 24, '2019-12-03 10:49:39', 170.95, '9662260665237417'),
+     (4, 22, '2019-08-26 22:53:43', 287.96, '9913380784509813'),
+     (4, 6, '2019-11-02 21:40:51', 221.32, '8514302750973913'),
+     (2, 44, '2020-04-07 01:47:06', 195.69, null),
+     (1, 19, '2020-01-18 04:56:25', 193.79, '0473615503743656'),
+     (2, 41, '2019-08-23 03:44:31', 35.18, '4760745164251026'),
+     (2, 32, '2020-05-15 03:14:05', 118.96, '9789391073940324'),
+     (2, 38, '2020-03-24 00:18:20', 92.86, '0687151800865251'),
+     (5, 17, '2020-04-24 15:36:39', 17.15, '8211393707942523'),
+     (3, 22, '2019-10-25 00:14:32', 0.82, '7919561636409150'),
+     (5, 33, '2020-02-10 11:46:14', 42.78, '4448240425826603');

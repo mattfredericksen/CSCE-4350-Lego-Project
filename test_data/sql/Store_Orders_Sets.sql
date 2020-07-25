@@ -1,10 +1,12 @@
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (9, 1005, 41);
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (9, 1007, 22);
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (10, 1017, 23);
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (7, 1004, 44);
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (8, 1020, 28);
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (6, 1008, 18);
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (7, 1016, 48);
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (9, 1019, 5);
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (8, 1019, 30);
-insert into Store_Orders_Sets (order_id, set_id, quantity) values (6, 1002, 29);
+insert into Store_Orders_Sets (order_id, set_id, quantity)
+values
+    (4, 1005, 41),
+    (4, 1007, 22),
+    (5, 1017, 23),
+    (2, 1004, 44),
+    (3, 1020, 28),
+    (1, 1008, 18),
+    (2, 1016, 48),
+    (4, 1019, 5),
+    (3, 1019, 30),
+    (1, 1002, 29);
