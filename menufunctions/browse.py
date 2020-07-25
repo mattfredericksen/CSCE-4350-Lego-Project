@@ -3,10 +3,10 @@
 from menuclasses.selection_menu import SelectionMenuFromTuples
 from .details import details
 
-from .sql import get_sets, get_bricks
+from sql import LegoDB
 
 
-def browse(context: dict, set_mode: bool):
+def browse(database: LegoDB, set_mode: bool):
     """Display a menu with all available Sets or Bricks.
     When the user selects an item, its details are displayed
     with an option to add that item to their cart.
@@ -14,7 +14,8 @@ def browse(context: dict, set_mode: bool):
 
     instructions = 'Select an item to view more details or '  \
                    'to add it to your cart.'
-    items = get_sets(description=False) if set_mode else get_bricks()
+    items = database.get_sets(description=False)  \
+        if set_mode else database.get_bricks()
 
     browser = SelectionMenuFromTuples(items, title=f'Browse {"Sets" if set_mode else "Bricks"}',
                                       prologue_text=instructions,
@@ -31,4 +32,4 @@ def browse(context: dict, set_mode: bool):
 
         if browser.selected_item is browser.exit_item:
             break
-        details(context, browser.selected_item.index)
+        details(database, browser.selected_item.index)

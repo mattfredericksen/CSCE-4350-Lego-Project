@@ -1,31 +1,28 @@
 from consolemenu.screen import Screen
-
-from typing import Literal
-
-from .sql import *
+from sql import LegoDB
 
 
-def details(context: dict, item_id: int):
+def details(database: LegoDB, item_id: int):
     while True:
         user_id = 2  # TODO: fix this after login stuff is complete
-        store_id = get_store_preference(user_id)
+        store_id = database.get_store_preference()
         print('ITEM DETAILS\n')
 
         # display the attributes corresponding to the item type
         print(f'Item ID: {item_id}')
         if item_id < 10000:
-            item = get_sets(item_id)
+            item = database.get_sets(item_id)
             print(f'Name: {item[1]}',
                   f'Description: {item[2]}',
-                  f'Price: ${get_set_price(item_id)}',
-                  f'Piece count: {get_set_count(item_id)}',
-                  f'Inventory: {get_set_inventory(store_id, item_id)}',
+                  f'Price: ${database.get_set_price(item_id)}',
+                  f'Piece count: {database.get_set_count(item_id)}',
+                  f'Inventory: {database.get_set_inventory(item_id)}',
                   sep='\n')
         else:
-            item = get_bricks(item_id)
+            item = database.get_bricks(item_id)
             print(f'Description: {item[1]}',
                   f'Price: ${item[2]}',
-                  f'Inventory: {get_brick_inventory(store_id, item_id)}',
+                  f'Inventory: {database.get_brick_inventory(item_id)}',
                   sep='\n')
 
         print('\nSet the item quantity for your cart.\n'
@@ -39,7 +36,7 @@ def details(context: dict, item_id: int):
         except ValueError:
             pass
         else:
-            modify_cart(user_id, item_id, quantity)
+            database.modify_cart(item_id, quantity)
             if quantity > 0:
                 Screen.clear()
                 input('Item quantity has been set in your cart.\n\n'

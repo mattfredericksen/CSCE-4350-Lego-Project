@@ -1,5 +1,19 @@
 from menus.login_menu import login_menu
+from sql import LegoDB
 
+credentials = {
+    'host': 'localhost',
+    'username': 'root',
+    'password': 'password',
+    'database': 'lego'
+}
 
 if __name__ == '__main__':
-    login_menu.show()
+    host = input('Enter database host to start the application: ')
+    try:
+        database = LegoDB(**credentials)
+    except Exception as e:
+        print('Failed to connect to database:')
+        print(e)
+    else:
+        login_menu(database)

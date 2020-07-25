@@ -2,12 +2,6 @@
 
 from consolemenu.screen import Screen
 from menuclasses.selection_menu import SelectionMenuFromTuples
-from menus import payment_menu
-
-from typing import Literal
-
-from test_data.static import sets, bricks
-from .sql import *
 
 
 def add(context: dict, sale_items: dict) -> None:

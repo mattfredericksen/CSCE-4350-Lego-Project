@@ -18,7 +18,7 @@ class SelectionMenuFromTuples(SelectionMenu):
 
         # menu width is at least 80 expanding as necessary to fit strings
         # this expansion halts at terminal width
-        if not formatter:
+        if tuples and not formatter:
             width = min(get_terminal_size().columns, max(80, max(len(item[1]) for item in tuples) + 18))
             dimension = Dimension(width=width)
             formatter = MenuFormatBuilder(max_dimension=dimension)
