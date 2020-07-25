@@ -126,8 +126,8 @@ class LegoDB:
         cart_id = self.execute("""SELECT order_id FROM Customer_Orders
                                   WHERE customer_id = %s AND status = 'Cart';""",
                                self.user_id, single=True)[0]
-        return self.execute("""
-                  SELECT Sets.set_id, name, quantity, price
+        return self.execute(
+               """SELECT Sets.set_id, name, quantity, price
                   FROM Customer_Orders_Sets
                   INNER JOIN Sets
                   ON Customer_Orders_Sets.set_id = Sets.set_id
@@ -147,7 +147,8 @@ class LegoDB:
                   WHERE order_id = %s;""", cart_id, cart_id)
 
     def get_payments(self):
-        return self.execute("""SELECT payment_id, SUBSTRING(card_number, 13, 4), billing_address
+        return self.execute(
+               """SELECT payment_id, SUBSTRING(card_number, 13, 4), billing_address
                   FROM Payments
                   WHERE customer_id = %s
                   AND active = TRUE;""", self.user_id)
@@ -160,7 +161,8 @@ class LegoDB:
 
     def get_customer_orders(self, order_id=None):
         if order_id:
-            return self.execute("""SELECT name, quantity FROM customer_orders_sets
+            return self.execute(
+                   """SELECT name, quantity FROM customer_orders_sets
                       INNER JOIN sets
                       ON customer_orders_sets.set_id = sets.set_id
                       WHERE order_id = %s
@@ -229,3 +231,30 @@ class LegoDB:
         cursor.close()
         db.commit()
         db.close()
+
+    def get_sale(self, sale_id):
+        return self.execute(
+               """SELECT set_id, quantity, total_price, SUBSTRING(credit_card, 13, 4)
+                  FROM store_sales AS ss
+                  INNER JOIN store_sales_sets AS sss
+                  ON ss.sale_id = sss.sale_id
+                  WHERE ss.sale_id = %s
+                  UNION
+                  SELECT brick_id, quantity, total_price, SUBSTRING(credit_card, 13, 4)
+                  FROM store_sales AS ss
+                  INNER JOIN store_sales_bricks AS ssb
+                  ON ss.sale_id = ssb.sale_id
+                  WHERE ss.sale_id = %s;""",
+               sale_id, sale_id)
+
+    def is_sale_returned(self, sale_id):
+        return True if self.execute(
+                       """SELECT * from Store_Sales_Returns
+                          WHERE sale_id = %s;""",
+                       sale_id, single=True)  \
+               else False
+
+    def create_return(self, sale_id, reason):
+        self.execute("""INSERT INTO Store_Sales_Returns (sale_id, reason)
+                        VALUES (%s, %s)""",
+                     sale_id, reason, fetch=False)

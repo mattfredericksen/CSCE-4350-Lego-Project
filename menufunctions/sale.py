@@ -159,3 +159,43 @@ def confirm_exit(sale_items: dict) -> bool:
             return False
         else:
             Screen.clear()
+
+
+def sale_return(database: LegoDB):
+    print('SALE RETURN\n')
+    try:
+        sale_id = int(input('Enter Sale ID# from customer\'s receipt: '))
+    except ValueError:
+        input('Invalid Sale ID#. Press [enter] to return.')
+        return
+
+    if database.is_sale_returned(sale_id):
+        input('\nSale has already been returned. Press [enter] to return.')
+        return
+    elif not (sale_items := database.get_sale(sale_id)):
+        input('Sale does not exist. Press [enter] to return.')
+        return
+
+    Screen.clear()
+    print('SALE RETURN ITEMS\n')
+    for item_id, qty, *_ in sale_items:
+        name = database.get_sets(item_id)[1]  \
+            if item_id < 10000 else database.get_bricks(item_id)[1]
+        print(f'(Qty: {qty}) {name}')
+    print(f'\nTotal: ${sale_items[0][2]:,.2f}\n')
+
+    if not (reason := input('Reason for return [enter nothing to cancel]: ')):
+        return
+
+    if card := sale_items[0][3]:
+        input(f'\nCustomer\'s money will be refunded to card ending in {card}.\n'
+              'Press [enter] to complete return.')
+    else:
+        input(f'\nCustomer payed with cash. Refund them ${sale_items[0][2]:,.2f}'
+              'Press [enter] to complete return.')
+
+    try:
+        database.create_return(sale_id, reason)
+    except Exception as e:
+        print(f'\n{e}')
+        input('Failed to process return. Press [enter] to continue.')

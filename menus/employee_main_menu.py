@@ -4,6 +4,7 @@ from consolemenu import ConsoleMenu
 from consolemenu.items import FunctionItem
 
 from menuclasses.not_implemented_item import NotImplementedItem
+from menufunctions.sale import sale_return
 from .sale_menu import sale_menu
 from .store_menu import store_menu
 from .employee_menu import employee_menu
@@ -18,7 +19,7 @@ def employee_main_menu(database: LegoDB):
                        exit_option_text='Log Out')
 
     for item in (FunctionItem('Start a Sale', sale_menu, [database]),
-                 NotImplementedItem('NYI: Start a Return'),
+                 FunctionItem('Start a Return', sale_return, [database]),
                  NotImplementedItem('NYI: Inventory Management'),  # order/delivery
                  FunctionItem('Employee Management', employee_menu, [database]),
                  FunctionItem('Store Management', store_menu, [database]),
