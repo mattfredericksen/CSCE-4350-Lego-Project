@@ -52,10 +52,4 @@ def search(database: LegoDB):
             # return to "Browse & Search"
             break
         else:
-            details(database, i)
-            # # check whether the selection is a set or a brick
-            # # and display item details
-            # if (i := browser.selected_item.index) < 10000:
-            #     details(database, i)
-            # else:
-            #     details(database, i)
+            details(database, browser.selected_item.index)

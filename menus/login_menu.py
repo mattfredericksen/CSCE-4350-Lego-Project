@@ -10,7 +10,7 @@ def login_menu(database):
     menu = ConsoleMenu('The Lego Store', 'Please log in to continue')
 
     for item in (FunctionItem('Customer Login', login, [False, database]),
-                 FunctionItem('Create Account', create_account),
+                 FunctionItem('Create Account', create_account, [database]),
                  FunctionItem('Store Mode', login, [True, database])):
         menu.append_item(item)
     menu.show()

@@ -4,8 +4,6 @@ from sql import LegoDB
 
 def details(database: LegoDB, item_id: int):
     while True:
-        user_id = 2  # TODO: fix this after login stuff is complete
-        store_id = database.get_store_preference()
         print('ITEM DETAILS\n')
 
         # display the attributes corresponding to the item type
