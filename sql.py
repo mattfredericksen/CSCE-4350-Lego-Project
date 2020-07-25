@@ -357,3 +357,27 @@ class LegoDB:
                INNER JOIN Most_Returned
                ON Bricks.brick_id = Most_Returned.brick_id;""")
         return {'sets': sets, 'bricks': bricks}
+
+    
+    #All below need to be checked#
+        def view_stores(self):
+            return self.execute("""SELECT * FROM Stores;""")
+        
+        def create_store(self, address, manager_id):
+            self.execute("""INSERT INTO Stores (address, manager_id) 
+                            VALUES (%s, %s);""", address, manager_id, fetch=false)
+        
+        def disable_store(self, store_id):
+            self.execute("""UPDATE Stores SET active = FALSE WHERE store_id = %s;""", store_id, fetch=false)
+        
+        def view_employees(self):
+            return self.execute("""SELECT * FROM Employees;""")
+        
+        def create_employee(self, name, username, password, store_id):
+            self.execute("""INSERT INTO Employees (name, username, password, store_id) 
+                            VALUES (%s, %s, %s, %s);""", name, username, password, store_id, fetch=false)
+        
+        def disable_employee(self, employee_id):
+            self.execute("""UPDATE Employees SET active = FALSE WHERE employee_id = %s;""", employee_id, fetch=false)
+            
+            
