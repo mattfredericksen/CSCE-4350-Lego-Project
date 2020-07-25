@@ -258,3 +258,102 @@ class LegoDB:
         self.execute("""INSERT INTO Store_Sales_Returns (sale_id, reason)
                         VALUES (%s, %s)""",
                      sale_id, reason, fetch=False)
+
+    def orders_report(self):
+        result = {}
+        query = self.execute(
+                    """SELECT COUNT(total_price), SUM(total_price), AVG(total_price) 
+                       FROM customer_orders
+                       WHERE status NOT IN ('Cart', 'Cancelled', 'Returned');""",
+                    single=True)
+        result.update({'order_count': query[0],
+                       'order_total': query[1],
+                       'average_price': query[2]})
+        query = self.execute(
+                    """SELECT SUM(quantity), AVG(quantity)
+                       FROM customer_orders_bricks
+                       WHERE order_id IN (SELECT order_id 
+                                          FROM customer_orders
+                                          WHERE status NOT IN 
+                                          ('Cart', 'Cancelled', 'Returned'));""",
+                    single=True)
+        result.update({'brick_count': query[0],
+                       'brick_average': round(query[1])})
+        query = self.execute(
+                    """SELECT SUM(quantity), AVG(quantity)
+                       FROM customer_orders_sets
+                       WHERE order_id IN (SELECT order_id 
+                                          FROM customer_orders
+                                          WHERE status NOT IN 
+                                          ('Cart', 'Cancelled', 'Returned'));""",
+                    single=True)
+        result.update({'set_count': query[0],
+                       'set_average': round(query[1])})
+        return result
+
+    def cancellations_report(self):
+        return self.execute(
+                   """SELECT COUNT(total_price), SUM(total_price) 
+                      FROM Customer_Orders
+                      WHERE status = 'Cancelled';""",
+                   single=True)
+
+    def best_selling_report(self):
+        sets = self.execute(
+                   """WITH Best_Sellers AS
+                          (SELECT set_id, SUM(quantity) as sum
+                           FROM Customer_Orders as c_o
+                           INNER JOIN Customer_Orders_Sets as c_o_s
+                           ON c_o.order_id = c_o_s.order_id              
+                           WHERE c_o.status NOT IN ('Cart', 'Cancelled', 'Returned')
+                           GROUP BY set_id
+                           ORDER BY sum desc
+                           LIMIT 3)
+                      SELECT Sets.set_id, name, sum
+                      FROM Sets
+                      INNER JOIN Best_Sellers
+                      ON Sets.set_id = Best_Sellers.set_id;""")
+        bricks = self.execute(
+                     """WITH Best_Sellers AS
+                            (SELECT brick_id, SUM(quantity) as sum
+                             FROM Customer_Orders as c_o
+                             INNER JOIN Customer_Orders_Bricks as c_o_b
+                             ON c_o.order_id = c_o_b.order_id
+                             WHERE c_o.status NOT IN ('Cart', 'Cancelled', 'Returned')
+                             GROUP BY brick_id
+                             ORDER BY sum desc
+                             LIMIT 3)
+                        SELECT Bricks.brick_id, description, sum
+                        FROM Bricks
+                        INNER JOIN Best_Sellers
+                        ON Bricks.brick_id = Best_Sellers.brick_id;""")
+        return {'sets': sets, 'bricks': bricks}
+
+    def most_returned_report(self):
+        sets = self.execute(
+            """WITH Most_Returned AS
+                   (SELECT set_id, SUM(quantity) as sum
+                    FROM Customer_Orders_Returns as c_o_r
+                    INNER JOIN Customer_Orders_Sets as c_o_s
+                    ON c_o_r.order_id = c_o_s.order_id
+                    GROUP BY set_id
+                    ORDER BY sum desc
+                    LIMIT 3)
+               SELECT Sets.set_id, name, sum
+               FROM Sets
+               INNER JOIN Most_Returned
+               ON Sets.set_id = Most_Returned.set_id;""")
+        bricks = self.execute(
+            """WITH Most_Returned AS
+                   (SELECT brick_id, SUM(quantity) as sum
+                    FROM Customer_Orders_Returns as c_o_r
+                    INNER JOIN Customer_Orders_Bricks as c_o_b
+                    ON c_o_r.order_id = c_o_b.order_id
+                    GROUP BY brick_id
+                    ORDER BY sum desc
+                    LIMIT 3)
+               SELECT Bricks.brick_id, description, sum
+               FROM Bricks
+               INNER JOIN Most_Returned
+               ON Bricks.brick_id = Most_Returned.brick_id;""")
+        return {'sets': sets, 'bricks': bricks}
