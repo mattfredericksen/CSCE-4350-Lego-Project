@@ -123,14 +123,34 @@ def get_cart(user_id):
     cart_id = execute("""SELECT order_id FROM Customer_Orders
                          WHERE customer_id = %s AND status = 'Cart';""",
                       user_id, single=True)[0]
-    return execute("""SELECT Sets.set_id, name, quantity
+    return execute("""SELECT Sets.set_id as item_id, name, quantity, price
                       FROM Customer_Orders_Sets
                       INNER JOIN Sets
                       ON Customer_Orders_Sets.set_id = Sets.set_id
+                      INNER JOIN (SELECT set_id, SUM(quantity * price) as price
+                                  FROM Sets_Bricks
+                                  INNER JOIN Bricks 
+                                  ON Sets_Bricks.brick_id = Bricks.brick_id
+                                  GROUP BY set_id)
+                                  AS Sets_Prices
+                      ON Sets.set_id = Sets_Prices.set_id
                       WHERE order_id = %s
                       UNION
-                      SELECT Bricks.brick_id, description, quantity
+                      SELECT Bricks.brick_id as item_id, description, quantity, price
                       FROM Customer_Orders_Bricks
                       INNER JOIN Bricks
                       ON Customer_Orders_Bricks.brick_id = Bricks.brick_id
-                      WHERE order_id = %s""", cart_id, cart_id)
+                      WHERE order_id = %s;""", cart_id, cart_id)
+
+
+def get_payments(user_id):
+    return execute("""SELECT payment_id, SUBSTRING(card_number, 13, 4), billing_address
+                      FROM Payments
+                      WHERE customer_id = 1
+                          AND active = TRUE;""")
+
+
+def checkout(user_id, payment_id):
+    total = sum(quantity * price for *_, quantity, price in get_cart(user_id))
+    execute('CartToOrder', user_id, payment_id,
+            get_store_preference(user_id), total, procedure=True)

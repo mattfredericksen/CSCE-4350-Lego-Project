@@ -2,6 +2,7 @@
 
 from consolemenu.screen import Screen
 from menuclasses.selection_menu import SelectionMenuFromTuples
+from menus import payment_menu
 
 from typing import Literal
 
@@ -97,8 +98,7 @@ def remove(context: dict, sale_items: dict) -> None:
             menu.remove_item(menu_item)
 
 
-def print_sale(context: dict, sale_items: dict,
-               title: str, prompt: str) -> str:
+def print_sale(sale_items: dict, title: str, prompt: str) -> str:
     """Print current sale items in a receipt-like format"""
     total_quantity = 0
     total_price = 0.0
@@ -106,7 +106,6 @@ def print_sale(context: dict, sale_items: dict,
           'Quantity | Unit Price | Item\n'
           '-------- | ---------- | ---------------')
     for item_id, item in sale_items.items():
-        # item = sets[item_id]
         total_quantity += item['quantity']
         total_price += item['price'] * item['quantity']
         price = f'${item["price"]:,.2f}'
@@ -120,15 +119,10 @@ def print_sale(context: dict, sale_items: dict,
 
 def view(context: dict, sale_items: dict) -> None:
     """Print the sale. No modification."""
-    print_sale(context, sale_items, 'SALE IN PROGRESS',
-               'Press [enter] to return to the sale.')
+    print_sale(sale_items, 'SALE IN PROGRESS', 'Press [enter] to return to the sale.')
 
 
 def complete(context: dict, sale_items: dict) -> bool:
-    # choose payment option
-    # process payment
-    # record sale in database
-    # return to main menu
     pass
 
 
@@ -142,7 +136,7 @@ def confirm_exit(context: dict, sale_items: dict) -> bool:
         return True
 
     while True:
-        answer = print_sale(context, sale_items, 'CONFIRM SALE CANCELLATION',
+        answer = print_sale(sale_items, 'CONFIRM SALE CANCELLATION',
                             'Are you sure you want to cancel this sale? [y/n]: ')
         if answer in ('y', 'ye', 'yes'):
             return True
