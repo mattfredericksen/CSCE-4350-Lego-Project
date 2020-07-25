@@ -14,7 +14,7 @@ CREATE TABLE Stores (
 CREATE TABLE Employees (
     employee_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(64) NOT NULL,
-    username VARCHAR(64) NOT NULL,
+    username VARCHAR(64) NOT NULL UNIQUE,
     password VARCHAR(64) NOT NULL,
     store_id INT NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
