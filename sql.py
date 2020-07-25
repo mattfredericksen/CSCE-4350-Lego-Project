@@ -380,4 +380,24 @@ class LegoDB:
         def disable_employee(self, employee_id):
             self.execute("""UPDATE Employees SET active = FALSE WHERE employee_id = %s;""", employee_id, fetch=false)
             
+        def generate_sales_report(self):
+            sales = self.execute("""SELECT COUNT(sale_id) as num_sales, sum(total_price) as earnings, avg(total_price) as average_price
+                                    FROM Store_Sales;""", single=true)
+            employee_sales = self.execute("""SELECT name, Store_Sales.employee_id, COUNT(sale_id) as num_sales
+                                             FROM Store_Sales, Employees 
+                                             WHERE Employees.employee_id = Store_Sales.employee_id 
+                                             group by Store_Sales.employee_id;""")
             
+            return {'sales' : sales, 'employee_sales' : employee_sales}
+        
+        def store_returns(self):
+            return self.execute("""SELECT COUNT(Store_Sales_Returns.sale_id) as num_returns, SUM(Store_Sales.total_price) as total_price_returned 
+                                   FROM Store_Sales_Returns, Store_Sales 
+                                   WHERE Store_Sales.sale_id = Store_Sales_Returns.sale_id;""")
+        
+        def inventory(self, bricks_threshold, sets_threshold):
+            bricks = self.execute("""SELECT * FROM Stores_Bricks where inventory < %s;""", bricks_threshold)
+            
+            sets = self.execute("""SELECT * FROM Stores_Sets where inventory < %s;""", sets_threshold)
+            
+            return {'sets': sets, 'bricks': bricks}
