@@ -53,9 +53,13 @@ def get_store_preference(customer_id=None):
 
 def get_sets(set_id=None, description=True):
     if set_id:
-        return execute("""SELECT * FROM Sets
+        item = execute("""SELECT * FROM Sets
                           WHERE set_id = %s;""",
                        set_id, single=True)
+        if not item:
+            raise ValueError
+        else:
+            return item
     elif description:
         return execute("""SELECT set_id, name, description
                           FROM Sets
@@ -68,9 +72,13 @@ def get_sets(set_id=None, description=True):
 
 def get_bricks(brick_id=None):
     if brick_id:
-        return execute("""SELECT * FROM Bricks
-                          WHERE brick_id = %s;""",
-                       brick_id, single=True)
+        brick = execute("""SELECT * FROM Bricks
+                           WHERE brick_id = %s;""",
+                        brick_id, single=True)
+        if not brick:
+            raise ValueError
+        else:
+            return brick
     else:
         return execute("""SELECT brick_id, description FROM Bricks 
                           WHERE active = TRUE;""")

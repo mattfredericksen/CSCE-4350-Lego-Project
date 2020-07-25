@@ -6,24 +6,28 @@ from menuclasses.selection_menu import SelectionMenuFromTuples
 from typing import Literal
 
 from test_data.static import sets, bricks
+from .sql import *
 
 
-def add(context: dict, sale_items: dict, mode: Literal['Set', 'Brick']) -> None:
+def add(context: dict, sale_items: dict) -> None:
     """Add an item to the current sale"""
 
     # exit loop when user enters nothing
-    while product_id := input(f'{mode} ID [enter nothing to return]: '):
+    while item_id := input(f'Item ID [enter nothing to return]: '):
         try:
-            product_id = int(product_id)
+            item_id = int(item_id)
         except ValueError:
             Screen.clear()
-            print(f'"{product_id}" is not a valid {mode} ID.\n')
+            print(f'"{item_id}" is not a valid Item ID.\n')
             continue
 
         # check validity of product_id
-        if product_id not in (sets if mode is 'Set' else bricks):
+        # assume original schema designation of set/bricks IDs applies
+        try:
+            item = get_sets(item_id) if item_id < 10000 else get_bricks(item_id)
+        except ValueError:
             Screen.clear()
-            print(f'"{product_id}" is not a valid {mode} ID.\n')
+            print(f'"{item_id}" is not a valid Item ID.\n')
             continue
 
         # get quantity of product to add to sale
@@ -40,21 +44,24 @@ def add(context: dict, sale_items: dict, mode: Literal['Set', 'Brick']) -> None:
             continue
 
         # add to or create entry depending on if it already exists
-        sale_items[product_id] = sale_items.get(product_id, 0) + quantity
+        if item_id in sale_items:
+            sale_items[item_id]['quantity'] += quantity
+        else:
+            sale_items[item_id] = {
+                'name': item[1],
+                'price': get_set_price(item_id) if item_id < 10000 else item[2],
+                'quantity': quantity
+            }
         Screen.clear()
-        print(f'Added {quantity} items to the sale.\n')
+        print(f'Added {quantity} "{item[1]}" to the sale.\n')
 
 
 def remove(context: dict, sale_items: dict) -> None:
     """Remove an item from the current sale"""
 
-    sale_sets, sale_bricks = sale_items['sets'], sale_items['bricks']
-
     # combine sets and bricks into a single list for displaying
-    items = [(i, f'(Qty: {q}) {sets[i]["name"]}')
-             for i, q in sale_sets.items()] +  \
-            [(i, f'(Qty: {q}) {bricks[i]["description"]}')
-             for i, q in sale_bricks.items()]
+    items = [(idx, f'(Qty: {item["quantity"]}) {item["name"]}')
+             for idx, item in sale_items.items()]
 
     menu = SelectionMenuFromTuples(items, 'Remove Items from Sale',
                                    exit_option_text='Return to Sale')
@@ -70,29 +77,23 @@ def remove(context: dict, sale_items: dict) -> None:
         # retrieve and validate quantity to remove
         quantity = input('How many should be removed? [enter nothing to cancel]: ')
         try:
-            quantity = int(quantity)
+            if (quantity := int(quantity)) < 1:
+                continue
         except ValueError:
             continue
 
-        if quantity < 1:
-            continue
+        # get set or brick
+        item = sale_items[menu_item.index]
 
-        # get set or brick id
-        item_id = menu_item.index
-        # discover whether id is a set or brick
-        items = sale_sets if item_id in sale_sets else sale_bricks
-
-        if quantity < items[item_id]:
-            # if some items will remain after removing:
-            # get length of number for reforming string
-            qty_len = len(str(items[item_id]))
+        if quantity < item['quantity']:
             # adjust cart quantity
-            items[item_id] -= quantity
+            item['quantity'] -= quantity
             # adjust "Remove" menu text for this item
-            menu_item.text = f'(Qty: {items[item_id]})' + menu_item.text[(7 + qty_len):]
+            menu_item.text = f'(Qty: {item["quantity"]}' \
+                             f'{menu_item.text[menu_item.text.find(")"):]}'
         else:
             # if no items will remain after removing:
-            del items[item_id]
+            del sale_items[menu_item.index]
             menu.remove_item(menu_item)
 
 
@@ -104,18 +105,12 @@ def print_sale(context: dict, sale_items: dict,
     print(title, '\n\n'
           'Quantity | Unit Price | Item\n'
           '-------- | ---------- | ---------------')
-    for item_id, quantity in sale_items['sets'].items():
-        item = sets[item_id]
-        total_quantity += quantity
-        total_price += item['price'] * quantity
-        price = f'${item["price"]:.2f}'
-        print(f'{quantity:8} | {price:>10} | {item["name"]}')
-    for item_id, quantity in sale_items['bricks'].items():
-        item = bricks[item_id]
-        total_quantity += quantity
-        total_price += item['price'] * quantity
-        price = f'${item["price"]:.2f}'
-        print(f'{quantity:8} | {price:>10} | {item["description"]}')
+    for item_id, item in sale_items.items():
+        # item = sets[item_id]
+        total_quantity += item['quantity']
+        total_price += item['price'] * item['quantity']
+        price = f'${item["price"]:,.2f}'
+        print(f'{item["quantity"]:8} | {price:>10} | {item["name"]}')
     print('\nTotals\n'
           '------\n'
           f'| Quantity: {total_quantity}\n'
@@ -143,7 +138,7 @@ def confirm_exit(context: dict, sale_items: dict) -> bool:
     """
 
     # no need to confirm when no items have been entered
-    if not (sale_items['sets'] or sale_items['bricks']):
+    if not sale_items:
         return True
 
     while True:
