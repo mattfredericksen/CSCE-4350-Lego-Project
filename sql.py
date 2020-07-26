@@ -12,6 +12,7 @@ class LegoDB:
         self.user_id = None
         self.user_type = None
         self.store = None
+        connect(**self.credentials)
 
     def execute(self, query, *args, single=False, procedure=False, fetch=True):
         """This function is used by many others to wrap the process of connecting

@@ -10,6 +10,15 @@ from sql import LegoDB
 
 
 def login(database: LegoDB, store_mode: bool):
+    if store_mode and not database.get_employees():
+        input('NOTICE: The database currently has no employees, so\n'
+              'you are being allowed entrance without credentials.\n'
+              'Once an employee account has been created, this will\n'
+              'no longer occur. Press [enter] to continue.')
+        employee_main_menu(database)
+        return
+
+
     username = input('Username: ')
 
     # getpass doesn't show characters as user types

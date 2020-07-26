@@ -22,7 +22,7 @@ def employee_main_menu(database: LegoDB):
                  FunctionItem('Start a Return', sale_return, [database]),
                  NotImplementedItem('NYI: Inventory Management'),  # order/delivery
                  FunctionItem('Employee Management', employee_menu, [database]),
-                 FunctionItem('NYI: Store Management', store_menu, [database]),
+                 FunctionItem('Store Management', store_menu, [database]),
                  FunctionItem('Reports', report_menu, [database])):
         menu.append_item(item)
     menu.show()

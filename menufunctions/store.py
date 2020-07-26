@@ -37,6 +37,11 @@ def create(database: LegoDB):
     except Exception as e:
         print(f'\n{e}')
         input('Failed to create store. Press [enter].')
+        return
 
     input('Store created.\n'
           'Press [enter] to return.')
+
+
+def remove(database: LegoDB):
+    pass

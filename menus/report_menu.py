@@ -17,7 +17,7 @@ def report_menu(database: LegoDB):
              FunctionItem('Online Order Cancellations', orders_cancellations, [database]),
              # count, total price, average sale total, sales per employee
              NotImplementedItem('NYI: Store Sales'),
-             # count, total return price, returns per employee
+             # count, total return price
              NotImplementedItem('NYI: Store Returns'),
              # across orders and sales
              FunctionItem('Best Selling Items', best_selling, [database]),

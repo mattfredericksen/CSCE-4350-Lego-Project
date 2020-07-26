@@ -18,6 +18,10 @@ def view(database: LegoDB):
 
 
 def create(database: LegoDB):
+    if not database.get_stores():
+        input('A Store must be created before new employees\n'
+              'can be added to the system. Press [enter].')
+        return
     print('CREATE EMPLOYEE\n')
     name = input("New employee name: ")
     username = input('New employee username: ')
