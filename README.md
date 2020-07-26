@@ -1,5 +1,7 @@
 ### Usage
 1. Download all project files.
+2. In a MySQL8 DBMS, run the SQL script `legoStoreDB.sql` to create the correct database and tables.
+3. Optionally, populate the database with `ALL.SQL` found under `test_data/`.
 2. Set up a [venv](https://docs.python.org/3/library/venv.html) (optional).
 3. Run `pip install -r requirements.txt`
 4. Run `lego_cli.py`
