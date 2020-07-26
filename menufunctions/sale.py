@@ -121,6 +121,9 @@ def view(sale_items: dict) -> None:
 
 
 def complete(database: LegoDB, sale_items: dict) -> bool:
+    if not sale_items:
+        input('No items in current sale. Press [enter].')
+        return False
     if print_sale(sale_items, 'SALE CONFIRMATION',
                   'Continue to payment? [y/n]: ')  \
             not in ('y', 'ye', 'yes'):
