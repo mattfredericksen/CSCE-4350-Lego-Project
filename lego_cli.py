@@ -3,9 +3,9 @@ from sql import LegoDB
 
 credentials = {
     'host': 'localhost',
-    'username': 'root',
-    'password': 'password',
-    'database': 'lego'
+    'username': 'LegoCoApp',
+    'password': 'LegoCoAppPass',
+    'database': 'LegoCo'
 }
 
 if __name__ == '__main__':

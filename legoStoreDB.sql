@@ -1,5 +1,8 @@
--- CREATE database LegoCo;
+CREATE database LegoCo;
+USE LegoCo;
 
+CREATE USER IF NOT EXISTS 'LegoCoApp'@'localhost' IDENTIFIED BY 'LegoCoAppPass';
+GRANT ALL ON * TO 'LegoCoApp'@'localhost';
 
 CREATE TABLE Stores (
     store_id INT NOT NULL AUTO_INCREMENT,
@@ -133,7 +136,7 @@ CREATE TABLE Customer_Orders (
 
 -- so that customers will always have a cart
 CREATE TRIGGER auto_cart_insert AFTER INSERT ON Customers
-FOR EACH ROW 
+FOR EACH ROW
     INSERT INTO customer_orders (customer_id, status)
     VALUES (NEW.customer_id, 'Cart');
 
