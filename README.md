@@ -1,4 +1,4 @@
-# LEGO Commercial Database & Interface
+# "LEGO Store" Database Application
 This project was completed on 07/25/2020 for Fundamentals of Database Systems. Personally, I am not satisfied with the final result; however, it achieved its purpose of demonstrating knowledge of the relevant technologies, and my team received full marks. This assignment is usually given during full semesters at UNT, but my team completed it during a summer semester, which prevented us (and everyone else in the class) from completing every specification. Since my work was rushed, I don't think this project is representative of the quality of my coding.
   
 The official assignment description can be seen [here](Assignment%20Details/Project%20Summer%202020.pdf). I created two reports for this project, the first of which is can be seen [here](Assignment%20Details/Phase%201%20Report.pdf). The second is a ~200MB power point including audio and video demonstrations and explanations of the application, and can be downloaded from [here](https://drive.google.com/file/d/1ApWX_2DxjKVF4HquRZJX20SwsUQmpGuX/view?usp=sharing).
