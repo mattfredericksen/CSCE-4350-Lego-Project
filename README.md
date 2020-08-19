@@ -10,7 +10,7 @@ This application uses a menu-driven interface. In general, upper-level menus (wh
 1. Download all project files.
 2. In a MySQL8 DBMS, run the SQL script `legoStoreDB.sql` to create the correct database and tables.
 3. Optionally, populate the database with `ALL.SQL` found under `test_data/`. Note that currently not all application functions work properly without test data.
-4. Optionally, set up a [venv](https://docs.python.org/3/library/venv.html).
+4. Optionally, set up a [virtual environment](https://docs.python.org/3/library/venv.html).
 5. Run `pip install -r requirements.txt`
 6. Run `lego_cli.py`
 
